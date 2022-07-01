@@ -1,0 +1,40 @@
+{
+  "description": "",
+  "formats": [
+    "oas2",
+    "oas3",
+    "oas3.0",
+    "oas3.1"
+  ],
+  "aliases": {},
+  "rules": {
+    "acme-path-pattern-with-hyphens": {
+      "given": [
+        "$.paths[*]~"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "pattern",
+        "functionOptions": {
+          "match": "^[a-z][a-z0-9\\-]*$"
+        }
+      },
+      "description": "Ensures URI paths are in kebab case",
+      "message": "Path {{property}} should be in kebab case"
+    },
+    "acme-path-must-be-versioned": {
+      "given": [
+        "$.paths[*]~"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "pattern",
+        "functionOptions": {
+          "match": "/v[0-9]/.*$"
+        }
+      },
+      "description": "Ensures that the path includes a version",
+      "message": "Version should be in the path {{property}}"
+    }
+  }
+}
