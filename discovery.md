@@ -4,17 +4,18 @@
 # API product name
 Product Catalog API
 
-# Job Stories (core problem solving benefit)
-
-When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
-
 # API Consumer
 The end user is a customer browsing Acme Pet Supplies products in order to make a purchase. They may do this via 3 main channels: 
 1. The Acme mobile app (Acme channel)
 2. The Acme web store (Acme channel)
 3. An affiliate's store. 
 
-# Digital capabilities 
+
+# Job Stories (core problem solving benefit)
+
+When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
+
+# User tasks
 - Browse for pet products in the Acme catalog. (MVP)
 - Search for pet products in the Acme catalog. (Phase 2)
 
@@ -38,7 +39,7 @@ Secure the API with an API key to identify the application channel the traffic i
 John Smith
 
 # API operation profile
-|Digital Capability| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path|  
+|User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path|  
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 |Browse for products| listProductCategories |List all product categories, providing number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories |
 |Browse for products| listProductsInACategory |List all products in a category, providing ordering and pagination parameters  | Customer | ProductCategory| Product Category ID, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /product-categories/{productCategoryId}/products?sortBy={sortingAttribute}&orderBy={orderingDirection}&pageToken={pageToken}&maxPageSize={maxPageSize} |
