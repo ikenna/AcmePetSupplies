@@ -5,7 +5,7 @@ rules:
   acme-path-pattern-with-hyphens:
     description: Ensures URI paths are in kebab case
     message: "Path {{property}} should be in kebab case"
-    severity: warn
+    severity: error
     given: $.paths[*]~
     then:
       function: pattern
