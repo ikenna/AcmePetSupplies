@@ -4,17 +4,9 @@
 # API product name
 Product Catalog API
 
-# Job definition 
-I want to care for my pet
-
-# Job Stories
-(The job story describes the core problem solving benefit of the API.)
+# Job Stories (core problem solving benefit)
 
 When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
-
-
-When I find a pet product I want, I want to quickly and easily order it, so I can get it delivered to me the next day.
-
 
 # API Consumer
 The end user is a customer browsing Acme Pet Supplies products in order to make a purchase. They may do this via 3 main channels: 
@@ -23,8 +15,8 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 3. An affiliate's store. 
 
 # Digital capabilities 
-- Browse for pet products
-- Search for pet products
+- Browse for pet products in the Acme catalog. (MVP)
+- Search for pet products in the Acme catalog. (Phase 2)
 
 
 # API Technology solution
