@@ -1,0 +1,23 @@
+extends: ["spectral:oas"]
+
+rules:
+  
+  acme-path-pattern-with-hyphens:
+    description: Ensures URI paths are in kebab case
+    message: "Path {{property}} should be in kebab case"
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9\\-]*$"
+
+  acme-path-must-be-versioned:
+    description: Ensures that the path includes a version
+    message: Version should be in the path {{property}}
+    severity: error
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "\/v[0-9]\/.*$"
