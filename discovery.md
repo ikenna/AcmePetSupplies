@@ -63,89 +63,53 @@ John Smith
 |Browse for products| getProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |
 
 
-# API Model
+# Web resources
 
 ```mermaid
 erDiagram
-    PRODUCT ||--o{ KEYWORDS : has
-    PRODUCT { 
-      uuid productId "Identifier for the product"
-      string name "Name of the product"
-      string description "A description of the product"
-      number price "Price of the product"
-      
-    }    
-    KEYWORDS {
-      string keyword "A Key word that describe the product. Useful for searching"
-    }
+  PRODUCT { 
+    uuid productId "Identifier for the product"
+    string name "Name of the product"
+    string description "A description of the product"
+    number price "Price of the product"
+    array keywords "A colleciton of words that describe the product, used for searching for it."
+    array productCategories "The links and names of the product categories to which the product belongs."
+  }    
 ```
 
 ```mermaid
-erDiagram
-    PRODUCT ||--o{ KEYWORDS 
-    PRODUCT { 
-      string productId 
-      string name 
-      string description
-      string price
-    }    
+erDiagram  
+  PRODUCT_CATEGORY {
+    uuid produCtCategoryId "Identifier of the category"
+    string name "Name of the product category"
+    number numberOfProducts "Number of products in the category"
+    array products "The link and names of the products in this category"
+  }
 ```
-string[] keywords "Key words that describe the product. Useful for searching"
-|productCategories|name and link to the productCategories this product belongs to|
 
-## Product
-|Item|Description|
-|----|-----------|
-|productId|Identifier for the product|
-|name|Name of the product|
-|description|A description of the product|
-|price|Price of the product|
-|keywords|Key words that describe the product. Useful for searching|
-|productCategories|name and link to the productCategories this product belongs to|
-
-## ProductCategory
-|Item|Description|
-|----|-----------|
-|categoryId|ID of the product category|
-|categoryName|Name of the product category|
-|products|The name, price and link to products in this category|
-|numberOfProducts|Number of products in the category|
-
-## ProductReviews
-|Item|Description|
-|----|-----------|
-|productId||
-|reviews||
-|rating||
-|date||
-|author||
+```mermaid
+erDiagram  
+  PRODUCT_REVIEW {
+    uuid productReviewId "Identifier for a product review"
+    string content "Review content"
+    number rating "The rating of the review. A number in the range 1 to 5, 1 for lowest and 5 for highest."
+    string authorName "Name of the author of the review"
+    date date "Date the review was submitted"
+  }
+```
 
 # Resource relationships
 
 ```mermaid
-classDiagram
-Product "*" --> "*" ProductCategory : Associative 
-Product "1" <.. "*" ProductReviews : Dependency
+erDiagram
+    PRODUCT ||--|{ PRODUCT_CATEGORY : associated_with
+    PRODUCT ||--o{ PRODUCT_REVIEW : has_a
 ```
 
-# Data model
 
-## Category
-|Item|Description|
-|----|-----------|
-|categoryId||
-|categoryName||
+# API Sequence diagram
 
-## Reviews
-|Item|Description|
-|----|-----------|
-|reviewID|
-|title||
-|content||
-|rating||
-|date||
-|author||
-
+ 
 
 
 
