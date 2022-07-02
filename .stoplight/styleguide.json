@@ -9,7 +9,7 @@
   ],
   "aliases": {},
   "rules": {
-    "acme-path-pattern-with-hyphens": {
+    "acme-paths-kebab-case": {
       "given": [
         "$.paths[*]~"
       ],
@@ -17,27 +17,27 @@
       "then": {
         "function": "pattern",
         "functionOptions": {
-          "match": "^[a-z][a-z0-9\\-]*$"
+          "match": "^(\\/|[a-z0-9-.]+|{[a-zA-Z0-9]+})+$"
         }
       },
-      "name": "acme-path-pattern-with-hyphens",
-      "description": "Ensures URI paths are in kebab case",
+      "name": "acme-paths-kebab-case",
+      "description": "Ensures URI paths are in kebab case (lower case, separated by hyphones)",
       "message": "Path {{property}} should be in kebab case"
     },
-    "acme-path-must-be-versioned": {
+    "acme-operation-id-should-be-camel-case": {
       "given": [
-        "$.paths[*]~"
+        "$.paths.*[get,post,patch,put,delete].operationId"
       ],
-      "severity": "error",
+      "severity": "warn",
       "then": {
-        "function": "pattern",
+        "function": "casing",
         "functionOptions": {
-          "match": "/v[0-9]/.*$"
+          "type": "camel"
         }
       },
-      "name": "acme-path-must-be-versioned",
-      "description": "Ensures that the path includes a version",
-      "message": "Version should be in the path {{property}}"
+      "name": "acme-operation-id-should-be-camel-case",
+      "description": "Ensures that operation IDs  are in camel case.",
+      "message": "Operation ID '{{value}}' should be in camel case."
     }
   },
   "extendedDefault": true
