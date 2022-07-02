@@ -35,6 +35,14 @@ paths:
                       $ref: '#/components/schemas/ProductCategory'
                 required:
                   - productCategories
+              examples:
+                example-1:
+                  value:
+                    productCategories:
+                      - productCategoryId: 1e32231d-b8a1-4145-b539-820301c2af64
+                        name: Dogs
+                        numberOfProducts: '10'
+                        productLinks: string
       operationId: listProductCategories
       description: 'List all product categories, providing the number of products in a category.'
   '/product-categories/{productCategory}/products':
@@ -56,10 +64,17 @@ paths:
             schema:
               type: object
               properties:
-                productSumary:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductLinks'
+                meta:
                   type: string
-                pa:
-                  type: string
+            examples:
+              example-1:
+                value:
+                  productSumary: string
+                  pa: string
   '/products/{productId}':
     parameters:
       - schema:
@@ -141,6 +156,18 @@ components:
         - productId
         - name
         - price
+      examples:
+        - productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
+          name: Acme Uber Dog Rope Toy
+          description: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
+          price: 100
+          keywords:
+            - dog toy
+          productCategories:
+            - name: Dogs
+              uri: /dogs
+          reviewRating: 5
+          numberOfReviews: 10
     ProductCategoryLinks:
       title: ProductCategoryLinks
       x-stoplight:
@@ -159,11 +186,21 @@ components:
       required:
         - name
         - uri
+      examples:
+        - name: Dogs
+          uri: /dogs
     ProductCategory:
       title: ProductCategory
       x-stoplight:
         id: elt8m3eura182
       type: object
+      examples:
+        - productCategoryId: 1e32231d-b8a1-4145-b539-820301c2af64
+          name: Dogs
+          numberOfProducts: '10'
+          productLinks:
+            - name: Acme Dog Rope Toy
+              uri: /products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8
       properties:
         productCategoryId:
           type: string
@@ -180,16 +217,27 @@ components:
           minimum: 0
           maximum: 10000000
         productLinks:
-          type: string
+          format: uri-reference
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductLinks'
+      required:
+        - productCategoryId
+        - name
+        - numberOfProducts
+        - productLinks
     ProductLinks:
       title: ProductLinks
       x-stoplight:
         id: yj6ij912uwywo
       type: object
+      examples:
+        - name: Acme Dog Rope Toy
+          uri: /products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8
       properties:
         name:
           type: string
-          example: Acme Doc Rope Toy
+          example: Acme Dog Rope Toy
         uri:
           type: string
           format: uri-reference
