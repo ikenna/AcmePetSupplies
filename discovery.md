@@ -80,7 +80,7 @@ erDiagram
     string content "Review content"
     number rating "The rating of the review. A number in the range 1 to 5, 1 for lowest and 5 for highest."
     string authorName "Name of the author of the review"
-    date date "Date the review was submitted"
+    submittedDate dateTime "Date the review was submitted"
   }
 ```
 
