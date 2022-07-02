@@ -19,7 +19,7 @@ servers:
 paths:
   /product-categories:
     get:
-      summary: Your GET endpoint
+      summary: Get all Product Categories
       tags: []
       responses:
         '200':
@@ -53,7 +53,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get Products in a Product Category
       tags: []
       responses: {}
       operationId: listProductsInCategory
@@ -90,7 +90,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get a Product
       tags: []
       responses:
         '200':
@@ -123,7 +123,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get a Product Review
       tags: []
       responses:
         '200':
