@@ -354,8 +354,8 @@ components:
         - rating
         - authorName
         - submittedDate
-    Model:
-      title: Model
+    Pagination:
+      title: Pagination
       x-stoplight:
         id: eo3hjmqtxvm9l
       type: object
@@ -365,7 +365,6 @@ components:
           prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
           next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
           last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
-      title: Pagination
       description: An object containing pagination information
       properties:
         self:
