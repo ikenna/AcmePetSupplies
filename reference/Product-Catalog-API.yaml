@@ -34,7 +34,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/ProductCategory'
                   pagination:
-                    $ref: ../models/Pagination.yaml
+                    $ref: '#/components/schemas/Pagination'
                 required:
                   - data
               examples:
@@ -71,7 +71,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/ProductLinks'
                 meta:
-                  $ref: ../models/Pagination.yaml
+                  $ref: '#/components/schemas/Pagination'
             examples:
               example-1:
                 value:
@@ -135,7 +135,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/ProductReview'
                   pagination:
-                    $ref: ../models/Pagination.yaml
+                    $ref: '#/components/schemas/Pagination'
                 required:
                   - data
                   - pagination
@@ -395,4 +395,3 @@ components:
       type: apiKey
       in: header
       description: ''
-
