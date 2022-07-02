@@ -44,7 +44,7 @@ John Smith
 |Browse for products| listProductCategories |List all product categories, providing the number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories | 200 |
 |Browse for products| listProductsInCategory |List all products in a category, providing ordering and pagination parameters  | Customer | ProductCategory| Product Category ID, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /product-categories/{productCategoryId}/products?sortBy={sortingAttribute}&orderBy={orderingDirection}&pageToken={pageToken}&maxPageSize={maxPageSize} |  200 |
 |Browse for products| viewProduct |View a product's details | Customer | Product | Product ID   | Product | GET | /products/{productId} | 200 |
-|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |  200 |
+|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews |  200 |
 
 
 # Web Resources
