@@ -17,9 +17,9 @@ servers:
   - url: 'http://staging.acme-pet-supplies.com/v1/catalog'
     description: Staging
 paths:
-  /product-categories:
+  /categories:
     get:
-      summary: Get all Product Categories
+      summary: Get all Categories
       tags: []
       responses:
         '200':
@@ -32,11 +32,12 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ProductCategoryLinks'
+                      $ref: '#/components/schemas/Category'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
                 required:
                   - data
+                  - pagination
               examples:
                 example-1:
                   value:
@@ -50,20 +51,16 @@ paths:
                       next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
                       last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
       operationId: listProductCategories
-      description: 'List all product categories, providing the number of products in a category.'
-  '/product-categories/{productCategory}/products':
-    parameters:
-      - schema:
-          type: string
-        name: productCategory
-        in: path
-        required: true
+      description: List all categories.
+    parameters: []
+  /products:
+    parameters: []
     get:
-      summary: Get Products in a Product Category
+      summary: Get all Products.
       tags: []
       responses: {}
       operationId: listProductsInCategory
-      description: 'List all products in a category, providing ordering and pagination parameters'
+      description: List all products.
       requestBody:
         content:
           application/json:
@@ -73,7 +70,7 @@ paths:
                 data:
                   type: array
                   items:
-                    $ref: '#/components/schemas/ProductLinks'
+                    $ref: '#/components/schemas/Product'
                 meta:
                   $ref: '#/components/schemas/Pagination'
             examples:
@@ -121,7 +118,7 @@ paths:
                     numberOfReviews: 10
       operationId: viewProduct
       description: View a product's details.
-  /product-reviews:
+  /reviews:
     parameters: []
     get:
       summary: Get Product Reviews
@@ -137,7 +134,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ProductReview'
+                      $ref: '#/components/schemas/Review'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
                 required:
@@ -159,7 +156,7 @@ paths:
                       next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
                       last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
       operationId: listProductReviews
-      description: Get all reviews for a product.
+      description: Get all reviews.
 components:
   schemas:
     ProductCategoryLinks:
@@ -185,8 +182,8 @@ components:
       required:
         - name
         - uri
-    ProductCategory:
-      title: ProductCategory
+    Category:
+      title: Category
       x-stoplight:
         id: elt8m3eura182
       type: object
@@ -226,6 +223,7 @@ components:
         - name
         - numberOfProducts
         - productLinks
+      description: A product category.
     Product:
       title: Product
       x-stoplight:
@@ -319,11 +317,12 @@ components:
           maxLength: 200
           minLength: 0
           description: URI of the product.
-    ProductReview:
-      title: ProductReview
+    Review:
+      title: Review
       x-stoplight:
         id: ql1ifoos1mvp2
       type: object
+      description: 'A review for a product. '
       properties:
         productReviewId:
           type: string
@@ -352,12 +351,17 @@ components:
           example: '2022-04-12T23:20:50.52Z'
           description: |
             Date the review was submitted.
+        productId:
+          type: string
+          description: 'Product this review is for. '
+          format: uuid
       required:
         - productReviewId
         - content
         - rating
         - authorName
         - submittedDate
+        - productId
     Pagination:
       title: Pagination
       x-stoplight:
