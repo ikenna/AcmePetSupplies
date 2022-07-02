@@ -10,13 +10,31 @@ info:
     url: acme-pet-supplies.co.uk/docs
   termsOfService: 'http://acme-pet-supplies.co.uk/terms'
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'http://api.acme-pet-supplies.com/v1/catalog'
+    description: Production
+  - url: 'http://dev.acme-pet-supplies.com/v1/catalog'
+    description: Development
+  - url: 'http://staging.acme-pet-supplies.com/v1/catalog'
+    description: Staging
 paths:
   /product-categories:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productCategories:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductCategory'
+                required:
+                  - productCategories
       operationId: listProductCategories
       description: 'List all product categories, providing the number of products in a category.'
   '/product-categories/{productCategory}/products':
@@ -30,9 +48,19 @@ paths:
       summary: Your GET endpoint
       tags: []
       responses: {}
-      operationId: listProductsInACategory
+      operationId: listProductsInCategory
       description: 'List all products in a category, providing ordering and pagination parameters'
-  '/product/{productId}':
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productSumary:
+                  type: string
+                pa:
+                  type: string
+  '/products/{productId}':
     parameters:
       - schema:
           type: string

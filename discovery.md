@@ -20,8 +20,8 @@ When I need a product to care for my pet, I want to discover a great range of pr
 - Search for pet products in the Acme catalog. (Phase 2)
 
 
-# API Technology solution
-REST API
+# API Technology Solution and Versioning Strategy
+This is a REST API. It will use path level versioning 
 
 # Access Level
 Public API, made available for use by both Acme owned digital channels and to registered affiliates. 
@@ -39,12 +39,12 @@ Secure the API with an API key to identify the application channel the traffic i
 John Smith
 
 # API operation profile
-|User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path|  
-|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-|Browse for products| listProductCategories |List all product categories, providing the number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories |
-|Browse for products| listProductsInACategory |List all products in a category, providing ordering and pagination parameters  | Customer | ProductCategory| Product Category ID, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /product-categories/{productCategoryId}/products?sortBy={sortingAttribute}&orderBy={orderingDirection}&pageToken={pageToken}&maxPageSize={maxPageSize} |
-|Browse for products| viewProduct |View a product's details | Customer | Product | Product ID   | Product | GET | /product/{productId} |
-|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |
+|User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path| Response Code|   
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+|Browse for products| listProductCategories |List all product categories, providing the number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories | 200 |
+|Browse for products| listProductsInCategory |List all products in a category, providing ordering and pagination parameters  | Customer | ProductCategory| Product Category ID, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /product-categories/{productCategoryId}/products?sortBy={sortingAttribute}&orderBy={orderingDirection}&pageToken={pageToken}&maxPageSize={maxPageSize} |  200 |
+|Browse for products| viewProduct |View a product's details | Customer | Product | Product ID   | Product | GET | /products/{productId} | 200 |
+|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |  200 |
 
 
 # Web Resources
