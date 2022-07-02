@@ -7,7 +7,7 @@ examples:
     prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
     next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
     last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
-title: Meta
+title: Pagination
 description: An object containing pagination information
 properties:
   self:
