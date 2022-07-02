@@ -34,7 +34,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/ProductCategory'
                   pagination:
-                    $ref: ../models/Pagination.yaml
+                    $ref: '#/components/schemas/Pagination'
                 required:
                   - data
               examples:
@@ -71,7 +71,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/ProductLinks'
                 meta:
-                  $ref: ../models/Pagination.yaml
+                  $ref: '#/components/schemas/Pagination'
             examples:
               example-1:
                 value:
@@ -135,7 +135,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/ProductReview'
                   pagination:
-                    $ref: ../models/Pagination.yaml
+                    $ref: '#/components/schemas/Pagination'
                 required:
                   - data
                   - pagination
@@ -354,21 +354,44 @@ components:
         - rating
         - authorName
         - submittedDate
-    Model:
-      title: Model
+    Pagination:
+      title: Pagination
       x-stoplight:
         id: eo3hjmqtxvm9l
       type: object
-      properties:
-        id:
-          type: string
       examples:
-        - id: string
+        - self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
+          first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
+          prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
+          next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
+          last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+      description: An object containing pagination information
+      properties:
+        self:
+          type: string
+          format: uri
+          description: Cursor pointing to the current page.
+        first:
+          type: string
+          format: uri
+          description: Cursor to the first page.
+        prev:
+          type: string
+          format: uri
+          description: Cursor to the previous page.
+        next:
+          type: string
+          format: uri
+          description: Cursor to the next page.
+        last:
+          type: string
+          format: uri
+          description: Cursor to the last page.
+      required:
+        - self
   securitySchemes:
     apiKey:
       name: 142a3e7e-6075-40e8-9bad-136a136f335d
       type: apiKey
       in: header
       description: ''
-  requestBodies: {}
-  responses: {}
