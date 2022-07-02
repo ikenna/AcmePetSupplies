@@ -57,9 +57,9 @@ erDiagram
     string description "A description of the product"
     number price "Price of the product"
     array keywords "A colleciton of words that describe the product, used for searching for it."
-    array productCategories "The links and names of the product categories to which the product belongs."
+    array productCategoryLinks "The links and names of the product categories to which the product belongs."
     number reviewRating "Average product review rating"
-    number numOfReviews "Number of product reviews"
+    number numberOfReviews "Number of product reviews"
   }    
 ```
 
@@ -69,7 +69,7 @@ erDiagram
     uuid produCtCategoryId "Identifier of the category"
     string name "Name of the product category"
     number numberOfProducts "Number of products in the category"
-    array products "The link and names of the products in this category"
+    array productLinks "The link and names of the products in this category"
   }
 ```
 

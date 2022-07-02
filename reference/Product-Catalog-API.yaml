@@ -1,0 +1,293 @@
+openapi: 3.1.0
+info:
+  title: Product Catalog API
+  version: '1.0'
+  description: 'The Product Catalog API enables customers browse Acme Pet Supplies great range of pet products and their product reviews. '
+  summary: Browse Acme Pet Supplies catalog
+  contact:
+    name: John Smit
+    email: john.smith@acme-pet-supplies.co.uk
+    url: acme-pet-supplies.co.uk/docs
+  termsOfService: 'http://acme-pet-supplies.co.uk/terms'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{userId}':
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+    get:
+      summary: Get User Info by User ID
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Get User Alice Smith:
+                  value:
+                    id: 142
+                    firstName: Alice
+                    lastName: Smith
+                    email: alice.smith@gmail.com
+                    dateOfBirth: '1997-10-31'
+                    emailVerified: true
+                    signUpDate: '2019-08-24'
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+    patch:
+      summary: Update User Information
+      operationId: patch-users-userId
+      responses:
+        '200':
+          description: User Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Updated User Rebecca Baker:
+                  value:
+                    id: 13
+                    firstName: Rebecca
+                    lastName: Baker
+                    email: rebecca@gmail.com
+                    dateOfBirth: '1985-10-02'
+                    emailVerified: false
+                    createDate: '2019-08-24'
+        '404':
+          description: User Not Found
+        '409':
+          description: Email Already Taken
+      description: Update the information of an existing user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                  description: 'If a new email is given, the user''s email verified property will be set to false.'
+                dateOfBirth:
+                  type: string
+            examples:
+              Update First Name:
+                value:
+                  firstName: Rebecca
+              Update Email:
+                value:
+                  email: rebecca@gmail.com
+              Update Last Name & Date of Birth:
+                value:
+                  lastName: Baker
+                  dateOfBirth: '1985-10-02'
+        description: Patch user properties to update.
+  /user:
+    post:
+      summary: Create New User
+      operationId: post-user
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                New User Bob Fellow:
+                  value:
+                    id: 12
+                    firstName: Bob
+                    lastName: Fellow
+                    email: bob.fellow@gmail.com
+                    dateOfBirth: '1996-08-24'
+                    emailVerified: false
+                    createDate: '2020-11-18'
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+                  format: date
+              required:
+                - firstName
+                - lastName
+                - email
+                - dateOfBirth
+            examples:
+              Create User Bob Fellow:
+                value:
+                  firstName: Bob
+                  lastName: Fellow
+                  email: bob.fellow@gmail.com
+                  dateOfBirth: '1996-08-24'
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+    Product:
+      title: Product
+      x-stoplight:
+        id: rqw04761l3s4d
+      type: object
+      description: 'An item in Acme''s pet supplies catalog. '
+      properties:
+        productId:
+          type: string
+          format: uuid
+          example: dcd53ddb-8104-4e48-8cc0-5df1088c6113
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Acme Uber Dog Rope Toy
+        description:
+          type: string
+          maxLength: 300
+          minLength: 0
+          example: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
+        price:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          example: 100
+        keywords:
+          type: array
+          maxItems: 20
+          minItems: 0
+          uniqueItems: true
+          items:
+            type: string
+            example: dog toy
+        productCategories:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ProductCategoryLinks'
+        reviewRating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          format: int32
+          example: 5
+        numberOfReviews:
+          type: integer
+          example: 10
+          format: int32
+      required:
+        - productId
+        - name
+        - price
+    ProductCategoryLinks:
+      title: ProductCategoryLinks
+      x-stoplight:
+        id: w8av1b76lnbc3
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 0
+          maxLength: 20
+          example: Dogs
+        link:
+          type: string
+          example: /dogs
+          format: uri-reference
+      required:
+        - name
+        - link
+    ProductCategory:
+      title: ProductCategory
+      x-stoplight:
+        id: elt8m3eura182
+      type: object
+      properties:
+        productCategoryId:
+          type: string
+          format: uuid
+          example: 1e32231d-b8a1-4145-b539-820301c2af64
+        name:
+          type: string
+          example: Dogs
+          maxLength: 20
+          minLength: 0
+        numberOfProducts:
+          type: integer
+          example: '10'
+          minimum: 0
+          maximum: 10000000
+        productLinks:
+          type: string
+  securitySchemes:
+    apiKey:
+      name: 142a3e7e-6075-40e8-9bad-136a136f335d
+      type: apiKey
+      in: header
+      description: ''
