@@ -69,12 +69,19 @@ paths:
                   items:
                     $ref: '#/components/schemas/ProductLinks'
                 meta:
-                  type: string
+                  $ref: ../models/Meta.yaml
             examples:
               example-1:
                 value:
-                  productSumary: string
-                  pa: string
+                  data:
+                    - name: Acme Dog Rope Toy
+                      uri: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
+                  meta:
+                    self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
+                    first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
+                    prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
+                    next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
+                    last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
   '/products/{productId}':
     parameters:
       - schema:
@@ -85,7 +92,27 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                example-1:
+                  value:
+                    productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
+                    name: Acme Uber Dog Rope Toy
+                    description: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
+                    price: 100
+                    keywords:
+                      - dog toy
+                    productCategories:
+                      - name: Dogs
+                        uri: /dogs
+                    reviewRating: 5
+                    numberOfReviews: 10
       operationId: viewProduct
       description: View a product's details.
   '/product-reviews/{productReviewId}':
@@ -98,7 +125,21 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductReview'
+              examples:
+                example-1:
+                  value:
+                    productReviewId: a264188f-b5ba-4c5c-8f9c-d0e9348b14dc
+                    content: This dog toy is great! My dog loved to play with it. I thoroughly recommend.
+                    rating: 5
+                    authorName: Jill Baker
+                    submittedDate: '2022-04-12T23:20:50.52Z'
       operationId: listProductReviews
       description: Get all reviews for a product.
 components:
@@ -109,53 +150,6 @@ components:
         id: rqw04761l3s4d
       type: object
       description: 'An item in Acme''s pet supplies catalog. '
-      properties:
-        productId:
-          type: string
-          format: uuid
-          example: dcd53ddb-8104-4e48-8cc0-5df1088c6113
-        name:
-          type: string
-          minLength: 1
-          maxLength: 50
-          example: Acme Uber Dog Rope Toy
-        description:
-          type: string
-          maxLength: 300
-          minLength: 0
-          example: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
-        price:
-          type: number
-          minimum: 0
-          maximum: 1000000
-          example: 100
-        keywords:
-          type: array
-          maxItems: 20
-          minItems: 0
-          uniqueItems: true
-          items:
-            type: string
-            example: dog toy
-        productCategories:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/ProductCategoryLinks'
-        reviewRating:
-          type: integer
-          minimum: 1
-          maximum: 5
-          format: int32
-          example: 5
-        numberOfReviews:
-          type: integer
-          example: 10
-          format: int32
-      required:
-        - productId
-        - name
-        - price
       examples:
         - productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
           name: Acme Uber Dog Rope Toy
@@ -168,27 +162,84 @@ components:
               uri: /dogs
           reviewRating: 5
           numberOfReviews: 10
+      properties:
+        productId:
+          type: string
+          format: uuid
+          example: dcd53ddb-8104-4e48-8cc0-5df1088c6113
+          description: Identifier for the product.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 50
+          example: Acme Uber Dog Rope Toy
+          description: Name of the product.
+        description:
+          type: string
+          maxLength: 300
+          minLength: 0
+          example: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
+          description: A description of the product.
+        price:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          example: 100
+          description: Price of the product.
+        keywords:
+          type: array
+          maxItems: 20
+          minItems: 0
+          uniqueItems: true
+          description: 'A colleciton of words that describe the product, used for searching for it.'
+          items:
+            type: string
+            example: dog toy
+        productCategories:
+          type: array
+          uniqueItems: true
+          description: The links and names of the product categories to which the product belongs.
+          items:
+            $ref: '#/components/schemas/ProductCategoryLinks'
+        reviewRating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          format: int32
+          example: 5
+          description: Average product review rating.
+        numberOfReviews:
+          type: integer
+          example: 10
+          format: int32
+          description: Number of product reviews.
+      required:
+        - productId
+        - name
+        - price
     ProductCategoryLinks:
       title: ProductCategoryLinks
       x-stoplight:
         id: w8av1b76lnbc3
       type: object
+      examples:
+        - name: Dogs
+          uri: /dogs
       properties:
         name:
           type: string
           minLength: 0
           maxLength: 20
           example: Dogs
+          description: Name of the product category.
         uri:
           type: string
           example: /dogs
           format: uri-reference
+          description: URI of the product category.
       required:
         - name
         - uri
-      examples:
-        - name: Dogs
-          uri: /dogs
     ProductCategory:
       title: ProductCategory
       x-stoplight:
@@ -206,19 +257,23 @@ components:
           type: string
           format: uuid
           example: 1e32231d-b8a1-4145-b539-820301c2af64
+          description: Identifier of the category.
         name:
           type: string
           example: Dogs
           maxLength: 20
           minLength: 0
+          description: Name of the product category.
         numberOfProducts:
           type: integer
           example: '10'
           minimum: 0
           maximum: 10000000
+          description: Number of products in the category.
         productLinks:
           format: uri-reference
           type: array
+          description: The link and names of the products in this category.
           items:
             $ref: '#/components/schemas/ProductLinks'
       required:
@@ -233,17 +288,19 @@ components:
       type: object
       examples:
         - name: Acme Dog Rope Toy
-          uri: /products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8
+          uri: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
       properties:
         name:
           type: string
           example: Acme Dog Rope Toy
+          description: Product name.
         uri:
           type: string
-          format: uri-reference
-          example: /products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8
+          format: uri
+          example: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
           maxLength: 200
           minLength: 0
+          description: URI of the product.
     ProductReview:
       title: ProductReview
       x-stoplight:
@@ -254,23 +311,29 @@ components:
           type: string
           format: uuid
           example: a264188f-b5ba-4c5c-8f9c-d0e9348b14dc
+          description: Identifier for a product review.
         content:
           type: string
           example: This dog toy is great! My dog loved to play with it. I thoroughly recommend.
           maxLength: 500
           minLength: 0
+          description: Review content.
         rating:
           type: integer
           minimum: 1
           maximum: 5
           example: 5
+          description: 'The rating of the review. A number in the range 1 to 5, 1 for lowest and 5 for highest.'
         authorName:
           type: string
           example: Jill Baker
+          description: Name of the author of the review.
         submittedDate:
           type: string
           format: date-time
           example: '2022-04-12T23:20:50.52Z'
+          description: |
+            Date the review was submitted.
       required:
         - productReviewId
         - content
