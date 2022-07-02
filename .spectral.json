@@ -8,7 +8,7 @@
   ],
   "aliases": {},
   "rules": {
-    "acme-paths-kebab-case": {
+    "acme-s1-paths-kebab-case": {
       "given": [
         "$.paths[*]~"
       ],
@@ -22,7 +22,7 @@
       "description": "Ensures URI paths are in kebab case (lower case, separated by hyphones)",
       "message": "Path {{property}} should be in kebab case"
     },
-    "acme-operation-id-should-be-camel-case": {
+    "acme-s2-operation-id-should-be-camel-case": {
       "given": [
         "$.paths.*[get,post,patch,put,delete].operationId"
       ],

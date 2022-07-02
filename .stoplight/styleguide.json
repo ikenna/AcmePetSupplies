@@ -9,7 +9,7 @@
   ],
   "aliases": {},
   "rules": {
-    "acme-paths-kebab-case": {
+    "acme-s1-paths-kebab-case": {
       "given": [
         "$.paths[*]~"
       ],
@@ -20,11 +20,11 @@
           "match": "^(\\/|[a-z0-9-.]+|{[a-zA-Z0-9]+})+$"
         }
       },
-      "name": "acme-paths-kebab-case",
+      "name": "acme-s1-paths-kebab-case",
       "description": "Ensures URI paths are in kebab case (lower case, separated by hyphones)",
       "message": "Path {{property}} should be in kebab case"
     },
-    "acme-operation-id-should-be-camel-case": {
+    "acme-s2-operation-id-should-be-camel-case": {
       "given": [
         "$.paths.*[get,post,patch,put,delete].operationId"
       ],
@@ -35,7 +35,7 @@
           "type": "camel"
         }
       },
-      "name": "acme-operation-id-should-be-camel-case",
+      "name": "acme-s2-operation-id-should-be-camel-case",
       "description": "Ensures that operation IDs  are in camel case.",
       "message": "Operation ID '{{value}}' should be in camel case."
     }

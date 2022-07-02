@@ -1,7 +1,34 @@
-title: Meta
-x-stoplight:
-  id: hrjdzeltelquc
 type: object
+x-stoplight:
+  id: e67d056ed8a4f
+examples:
+  - self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
+    first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
+    prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
+    next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
+    last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+title: Meta
+description: An object containing pagination information
 properties:
-  id:
+  self:
     type: string
+    format: uri
+    description: Cursor pointing to the current page.
+  first:
+    type: string
+    format: uri
+    description: Cursor to the first page.
+  prev:
+    type: string
+    format: uri
+    description: Cursor to the previous page.
+  next:
+    type: string
+    format: uri
+    description: Cursor to the next page.
+  last:
+    type: string
+    format: uri
+    description: Cursor to the last page.
+required:
+  - self
