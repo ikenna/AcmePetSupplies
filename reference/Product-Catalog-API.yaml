@@ -11,7 +11,53 @@ info:
   termsOfService: 'http://acme-pet-supplies.co.uk/terms'
 servers:
   - url: 'http://localhost:3000'
-paths: {}
+paths:
+  /product-categories:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: listProductCategories
+      description: 'List all product categories, providing the number of products in a category.'
+  '/product-categories/{productCategory}/products':
+    parameters:
+      - schema:
+          type: string
+        name: productCategory
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: listProductsInACategory
+      description: 'List all products in a category, providing ordering and pagination parameters'
+  '/product/{productId}':
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: viewProduct
+      description: View a product's details.
+  '/product-reviews/{productReviewId}':
+    parameters:
+      - schema:
+          type: string
+        name: productReviewId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: listProductReviews
+      description: Get all reviews for a product.
 components:
   schemas:
     Product:

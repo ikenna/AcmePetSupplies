@@ -41,10 +41,10 @@ John Smith
 # API operation profile
 |User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path|  
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-|Browse for products| listProductCategories |List all product categories, providing number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories |
+|Browse for products| listProductCategories |List all product categories, providing the number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories |
 |Browse for products| listProductsInACategory |List all products in a category, providing ordering and pagination parameters  | Customer | ProductCategory| Product Category ID, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /product-categories/{productCategoryId}/products?sortBy={sortingAttribute}&orderBy={orderingDirection}&pageToken={pageToken}&maxPageSize={maxPageSize} |
 |Browse for products| viewProduct |View a product's details | Customer | Product | Product ID   | Product | GET | /product/{productId} |
-|Browse for products| getProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |
+|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews/{productReviewId} |
 
 
 # Web Resources
