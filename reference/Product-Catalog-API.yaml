@@ -32,7 +32,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/ProductCategory'
+                      $ref: '#/components/schemas/ProductCategoryLinks'
                   pagination:
                     $ref: '#/components/schemas/Pagination'
                 required:
@@ -40,11 +40,15 @@ paths:
               examples:
                 example-1:
                   value:
-                    productCategories:
-                      - productCategoryId: 1e32231d-b8a1-4145-b539-820301c2af64
-                        name: Dogs
-                        numberOfProducts: '10'
-                        productLinks: string
+                    data:
+                      - name: Dogs
+                        uri: /dogs
+                    pagination:
+                      self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
+                      first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
+                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
+                      next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
+                      last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
       operationId: listProductCategories
       description: 'List all product categories, providing the number of products in a category.'
   '/product-categories/{productCategory}/products':
@@ -175,7 +179,7 @@ components:
           description: Name of the product category.
         uri:
           type: string
-          example: /dogs
+          example: 'http://api.acme-pet-supplies.com/v1/catalog/product/dogs'
           format: uri-reference
           description: URI of the product category.
       required:
