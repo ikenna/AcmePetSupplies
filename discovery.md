@@ -41,10 +41,10 @@ John Smith
 # API operation profile
 |User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path| Response Code|   
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-|Browse for products| listProductCategories |List all product categories, providing the number of products in a category. A small collection so pagination not required.  | Customer | ProductCategory|   | ProductCategory[] | GET | /product-categories | 200 |
-|Browse for products| listProducts |List all products, providing ordering and pagination parameters  | Customer | Product| Filter by field, sort by field, order direction, page size, page token (cursor) | product name, product rating, product URI, pagination info | GET | /products |  200 |
-|Browse for products| viewProduct |View a product's details | Customer | Product | Product ID   | Product | GET | /products/{productId} | 200 |
-|Browse for products| listProductReviews |Get all reviews for a product | Customer | Reviews |   | ProductReviews[] | GET | /product-reviews |  200 |
+|Browse for products| listCategories |List all categories. | Customer | Category | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET | /categories | 200 |
+|Browse for products| listProducts |List all products. | Customer | Product| Filter by field, sort by field, order direction, page size, page cursor | Product[], PaginationInfo | GET | /products |  200 |
+|Browse for products| viewProduct |View a product's details. | Customer | Product | Product ID   | Product | GET | /products/{productId} | 200 |
+|Browse for products| listReviews |Get all reviews for a product | Customer | Review |  Filter by field, sort by field, order direction, page size, page cursor | Reviews[], PaginationInfo | GET | /reviews |  200 |
 
 
 # Web Resources
@@ -56,7 +56,7 @@ erDiagram
     string name "Name of the product"
     string description "A description of the product"
     number price "Price of the product"
-    array keywords "A colleciton of words that describe the product, used for searching for it."
+    array keywords "A colleciton of words that describe  the product, used for searching for it."
     array productCategoryLinks "The links and names of the product categories to which the product belongs."
     number reviewRating "Average product review rating"
     number numberOfReviews "Number of product reviews"
@@ -65,8 +65,8 @@ erDiagram
 
 ```mermaid
 erDiagram  
-  PRODUCT_CATEGORY {
-    uuid produCtCategoryId "Identifier of the category"
+  CATEGORY {
+    uuid categoryId "Identifier of the category"
     string name "Name of the product category"
     number numberOfProducts "Number of products in the category"
     array productLinks "The link and names of the products in this category"
@@ -75,8 +75,8 @@ erDiagram
 
 ```mermaid
 erDiagram  
-  PRODUCT_REVIEW {
-    uuid productReviewId "Identifier for a product review"
+  REVIEW {
+    uuid reviewId "Identifier for a product review"
     string content "Review content"
     number rating "The rating of the review. A number in the range 1 to 5, 1 for lowest and 5 for highest."
     string authorName "Name of the author of the review"
@@ -88,8 +88,8 @@ erDiagram
 
 ```mermaid
 erDiagram
-    PRODUCT ||--|{ PRODUCT_CATEGORY : associated_with
-    PRODUCT ||--o{ PRODUCT_REVIEW : has_a
+    PRODUCT ||--|{ CATEGORY : associated_with
+    PRODUCT ||--o{ REVIEW : has_a
 ```
 
 
@@ -99,22 +99,22 @@ erDiagram
 
 ```mermaid 
 sequenceDiagram
-    Customer ->>+ Product Catalog API: listProductCategories()
-    Product Catalog API ->>+ Category Microservice: listProductCategories()
-    Category Microservice -->>- Product Catalog API :  ProductCategory[]
-    Product Catalog API -->>- Customer:  ProductCategory[]
-    Customer ->>+ Product Catalog API: listProductsInACategory()
-    Product Catalog API ->>+ Category Microservice: listProductsInACategory()
-    Category Microservice -->>- Product Catalog API :  Product[], paginationInfo
+    Customer ->>+ Product Catalog API: listCategories()
+    Product Catalog API ->>+ Category Microservice: listCategories()
+    Category Microservice -->>- Product Catalog API :  Category[]
+    Product Catalog API -->>- Customer:  Category[]
+    Customer ->>+ Product Catalog API: listProducts()
+    Product Catalog API ->>+ Product Microservice: listProducts()
+    Product Microservice -->>- Product Catalog API :  Product[], paginationInfo
     Product Catalog API -->>- Customer:  Product[], paginationInfo
     Customer ->>+ Product Catalog API: viewProduct()
     Product Catalog API ->>+ Product Microservice: viewProduct()
     Product Microservice -->>- Product Catalog API:  Product
     Product Catalog API -->>- Customer:  Product
-    Customer ->>+ Product Catalog API: getProductReviews()
-    Product Catalog API ->>+ Reviews Microsrevice: getProductReviews()
-    Reviews Microsrevice -->>- Product Catalog API: ProductReviews[], paginationInfo
-    Product Catalog API -->>- Customer:  ProductReviews[], paginationInfo
+    Customer ->>+ Product Catalog API: listReviews()
+    Product Catalog API ->>+ Reviews Microsrevice: listReviews()
+    Reviews Microsrevice -->>- Product Catalog API: Reviews[], paginationInfo
+    Product Catalog API -->>- Customer:  Reviews[], paginationInfo
    
 ```            
 
