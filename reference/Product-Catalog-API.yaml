@@ -159,43 +159,17 @@ paths:
       description: Get all reviews.
 components:
   schemas:
-    ProductCategoryLinks:
-      title: ProductCategoryLinks
-      x-stoplight:
-        id: w8av1b76lnbc3
-      type: object
-      examples:
-        - name: Dogs
-          uri: /dogs
-      properties:
-        name:
-          type: string
-          minLength: 0
-          maxLength: 20
-          example: Dogs
-          description: Name of the product category.
-        uri:
-          type: string
-          example: 'http://api.acme-pet-supplies.com/v1/catalog/product/dogs'
-          format: uri-reference
-          description: URI of the product category.
-      required:
-        - name
-        - uri
     Category:
       title: Category
       x-stoplight:
         id: elt8m3eura182
       type: object
       examples:
-        - productCategoryId: 1e32231d-b8a1-4145-b539-820301c2af64
+        - categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
           name: Dogs
-          numberOfProducts: '10'
-          productLinks:
-            - name: Acme Dog Rope Toy
-              uri: /products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8
+      description: A product category.
       properties:
-        productCategoryId:
+        categoryId:
           type: string
           format: uuid
           example: 1e32231d-b8a1-4145-b539-820301c2af64
@@ -206,24 +180,9 @@ components:
           maxLength: 20
           minLength: 0
           description: Name of the product category.
-        numberOfProducts:
-          type: integer
-          example: '10'
-          minimum: 0
-          maximum: 10000000
-          description: Number of products in the category.
-        productLinks:
-          format: uri-reference
-          type: array
-          description: The link and names of the products in this category.
-          items:
-            $ref: '#/components/schemas/ProductLinks'
       required:
-        - productCategoryId
+        - categoryId
         - name
-        - numberOfProducts
-        - productLinks
-      description: A product category.
     Product:
       title: Product
       x-stoplight:
@@ -280,7 +239,7 @@ components:
           uniqueItems: true
           description: The links and names of the product categories to which the product belongs.
           items:
-            $ref: '#/components/schemas/ProductCategoryLinks'
+            $ref: '#/components/schemas/Category'
         reviewRating:
           type: integer
           minimum: 1
@@ -297,26 +256,6 @@ components:
         - productId
         - name
         - price
-    ProductLinks:
-      title: ProductLinks
-      x-stoplight:
-        id: yj6ij912uwywo
-      type: object
-      examples:
-        - name: Acme Dog Rope Toy
-          uri: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
-      properties:
-        name:
-          type: string
-          example: Acme Dog Rope Toy
-          description: Product name.
-        uri:
-          type: string
-          format: uri
-          example: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
-          maxLength: 200
-          minLength: 0
-          description: URI of the product.
     Review:
       title: Review
       x-stoplight:

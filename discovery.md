@@ -68,7 +68,6 @@ erDiagram
   CATEGORY {
     uuid categoryId "Identifier of the category"
     string name "Name of the product category"
-    number numberOfProducts "Number of products in the category"
     array productLinks "The link and names of the products in this category"
   }
 ```
