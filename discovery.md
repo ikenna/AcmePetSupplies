@@ -44,7 +44,7 @@ John Smith
 |Browse for products| listCategories |List all categories. | Customer | Category | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET | /categories | 200 |
 |Browse for products| listProducts |List all products. | Customer | Product| Filter by field, sort by field, order direction, page size, page cursor | Product[], PaginationInfo | GET | /products |  200 |
 |Browse for products| viewProduct |View a product's details. | Customer | Product | Product ID   | Product | GET | /products/{productId} | 200 |
-|Browse for products| listReviews |Get all reviews for a product | Customer | Review |  Filter by field, sort by field, order direction, page size, page cursor | Reviews[], PaginationInfo | GET | /reviews |  200 |
+|Browse for products| listReviews |Get all reviews. | Customer | Review |  Filter by field, sort by field, order direction, page size, page cursor | Reviews[], PaginationInfo | GET | /reviews |  200 |
 
 
 # Web Resources
@@ -68,7 +68,6 @@ erDiagram
   CATEGORY {
     uuid categoryId "Identifier of the category"
     string name "Name of the product category"
-    number numberOfProducts "Number of products in the category"
     array productLinks "The link and names of the products in this category"
   }
 ```
