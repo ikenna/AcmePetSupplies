@@ -34,8 +34,8 @@ jobs:
         id: diff_state
         uses: swimmwatch/openapi-diff-action@v1.0.0
         with:
-          old-spec: base/api.oas.yaml
-          new-spec: head/api.oas.yaml
+          old-spec: base/reference/product-catalog-api.oas.yaml
+          new-spec: head/reference/product-catalog-api.oas.yaml
           json: "out.json"
           markdown: "out.md"
       - name: "Upload OpenAPI-diff report as Github Artifact"
