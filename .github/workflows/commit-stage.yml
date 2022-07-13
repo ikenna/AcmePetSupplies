@@ -3,7 +3,7 @@ name: API Commit Stage
 on: 
   push:  # Trigger on merge to master
     branches:
-      - master
+      - main
 
 env:
   run_number: ${GITHUB_RUN_NUMBER}
