@@ -1,0 +1,10 @@
+{
+  "local": "./reference/product-catalog-api.oas.yaml",
+  "output": "./output/tests.postman.json",
+  "portmanConfigFile": "./test-config/portman-config.json",
+  "postmanConfigFile": "./test-config/postman-config.json",
+  "includeTests": true,
+  "bundleContractTests": true,
+  "syncPostman": false,
+  "runNewman": false
+}
