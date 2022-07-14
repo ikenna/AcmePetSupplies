@@ -10,12 +10,11 @@ info:
     url: acme-pet-supplies.co.uk/docs
   termsOfService: 'http://acme-pet-supplies.co.uk/terms'
 servers:
-  - url: 'http://api.acme-pet-supplies.com/v1/catalog'
-    description: Production
-  - url: 'http://dev.acme-pet-supplies.com/v1/catalog'
-    description: Development
-  - url: 'http://staging.acme-pet-supplies.com/v1/catalog'
-    description: Staging
+  - url: '{serverurl}'
+    variables: 
+      serverurl: 
+        default: 'https://api.acme-pet-supplies.com/v1/catalog'
+        description: The prod API environment. 
 paths:
   /categories:
     get:
@@ -89,6 +88,7 @@ paths:
     parameters:
       - schema:
           type: string
+          format: uuid
         name: productId
         in: path
         required: true

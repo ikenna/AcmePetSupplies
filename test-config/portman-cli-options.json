@@ -1,6 +1,5 @@
 {
   "local": "./reference/product-catalog-api.oas.yaml",
-  "baseUrl": "http://localhost:3050",
   "output": "./output/tests.postman.json",
   "portmanConfigFile": "./test-config/portman-config.json",
   "postmanConfigFile": "./test-config/postman-config.json",
