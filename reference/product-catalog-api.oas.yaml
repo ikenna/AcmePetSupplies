@@ -42,7 +42,7 @@ paths:
                   value:
                     data:
                       - name: Dogs
-                        uri: /dogs
+                        categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
                     pagination:
                       self: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=bccf5512'
                       first: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=fa0a11ec'
@@ -104,7 +104,7 @@ paths:
                           - dog toy
                         categories:
                           - name: Dogs
-                            uri: /dogs
+                            categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
                         reviewRating: 5
                         numberOfReviews: 10
                     pagination:
@@ -143,30 +143,6 @@ paths:
                     instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
       operationId: listProductsInCategory
       description: List all products.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Product'
-                meta:
-                  $ref: '#/components/schemas/Pagination'
-            examples:
-              example-1:
-                value:
-                  data:
-                    - name: Acme Dog Rope Toy
-                      uri: 'https://api.acme-pet-supplies.com/v1/catalog/products/b3daf590-bb20-473d-92a0-b4f8c4f5f9d8'
-                  meta:
-                    self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories/{productCategory}/products?cursor=bccf5512'
-                    first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories/{productCategory}/products?cursor=fa0a11ec'
-                    prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories/{productCategory}/products?cursor=0242ac120'
-                    next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories/{productCategory}/products?cursor=651b1f06'
-                    last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories/{productCategory}/products?cursor=3a1893e2'
   '/products/{productId}':
     parameters:
       - schema:
@@ -194,9 +170,9 @@ paths:
                     price: 100
                     keywords:
                       - dog toy
-                    productCategories:
-                      - name: Dogs
-                        uri: /dogs
+                    categories:
+                      - categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
+                        name: Dogs
                     reviewRating: 5
                     numberOfReviews: 10
         '401':
@@ -274,12 +250,13 @@ paths:
                         rating: 5
                         authorName: Jill Baker
                         submittedDate: '2022-04-12T23:20:50.52Z'
+                        productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
                     pagination:
-                      self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
-                      first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
-                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
-                      next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
-                      last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+                      self: 'https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=bccf5512'
+                      first: 'https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=fa0a11ec'
+                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=0242ac120'
+                      next: 'https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=651b1f06'
+                      last: 'https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=3a1893e2'
         '401':
           description: Unauthorized
           content:
@@ -350,8 +327,8 @@ components:
           keywords:
             - dog toy
           categories:
-            - name: Dogs
-              uri: /dogs
+            - categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
+              name: Dogs
           reviewRating: 5
           numberOfReviews: 10
       properties:
