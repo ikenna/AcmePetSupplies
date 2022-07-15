@@ -76,7 +76,7 @@ paths:
   /products:
     parameters: []
     get:
-      summary: Get all Products.
+      summary: Get all Products
       tags: []
       responses:
         '200':
