@@ -11,10 +11,10 @@ info:
   termsOfService: 'http://acme-pet-supplies.co.uk/terms'
 servers:
   - url: '{serverurl}'
-    variables: 
-      serverurl: 
+    variables:
+      serverurl:
         default: 'https://api.acme-pet-supplies.com/v1/catalog'
-        description: The prod API environment. 
+        description: The prod API environment.
 paths:
   /categories:
     get:
@@ -44,11 +44,32 @@ paths:
                       - name: Dogs
                         uri: /dogs
                     pagination:
-                      self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
-                      first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
-                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
-                      next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
-                      last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+                      self: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=bccf5512'
+                      first: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=fa0a11ec'
+                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=0242ac120'
+                      next: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=651b1f06'
+                      last: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=3a1893e2'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/401Unauthorized'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/resource-not-found
+                    title: Not Found
+                    status: 404
+                    detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
+                    instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403Forbidden'
+              examples: {}
       operationId: listProductCategories
       description: List all categories.
     parameters: []
@@ -57,7 +78,69 @@ paths:
     get:
       summary: Get all Products.
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              examples:
+                example-1:
+                  value:
+                    data:
+                      - productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
+                        name: Acme Uber Dog Rope Toy
+                        description: 'Acme Uber Dog Rope Toy provides hours of fun for your dog. Great for bouncing, throwing and catching. '
+                        price: 100
+                        keywords:
+                          - dog toy
+                        categories:
+                          - name: Dogs
+                            uri: /dogs
+                        reviewRating: 5
+                        numberOfReviews: 10
+                    pagination:
+                      self: 'https://api.acme-pet-supplies.com/v1/catalog/products?cursor=bccf5512'
+                      first: 'https://api.acme-pet-supplies.com/v1/catalog/products?cursor=fa0a11ec'
+                      prev: 'https://api.acme-pet-supplies.com/v1/catalog/products?cursor=0242ac120'
+                      next: 'https://api.acme-pet-supplies.com/v1/catalog/products?cursor=651b1f06'
+                      last: 'https://api.acme-pet-supplies.com/v1/catalog/products?cursor=3a1893e2'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Unauthorized'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    status: 401
+                    detail: The request has NOT been successfully authenticated. Please check you have the right API credentials.
+                    instance: /problems/unauthorized#log-22ce59a8-f263-4164-8d6d-18952a940748
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403Forbidden'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/forbidden
+                    title: Forbidden
+                    status: 403
+                    detail: You do not have permission to access this resource.
+                    instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
       operationId: listProductsInCategory
       description: List all products.
       requestBody:
@@ -116,6 +199,48 @@ paths:
                         uri: /dogs
                     reviewRating: 5
                     numberOfReviews: 10
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Unauthorized'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    status: 401
+                    detail: The request has NOT been successfully authenticated. Please check you have the right API credentials.
+                    instance: /problems/unauthorized#log-22ce59a8-f263-4164-8d6d-18952a940748
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403Forbidden'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/forbidden
+                    title: Forbidden
+                    status: 403
+                    detail: You do not have permission to access this resource.
+                    instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404NotFound'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/resource-not-found
+                    title: Not Found
+                    status: 404
+                    detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
+                    instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
       operationId: viewProduct
       description: View a product's details.
   /reviews:
@@ -155,6 +280,34 @@ paths:
                       prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
                       next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
                       last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Unauthorized'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    status: 401
+                    detail: The request has NOT been successfully authenticated. Please check you have the right API credentials.
+                    instance: /problems/unauthorized#log-22ce59a8-f263-4164-8d6d-18952a940748
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403Forbidden'
+              examples:
+                example-1:
+                  value:
+                    type: /problems/forbidden
+                    title: Forbidden
+                    status: 403
+                    detail: You do not have permission to access this resource.
+                    instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
       operationId: listProductReviews
       description: Get all reviews.
 components:
@@ -196,7 +349,7 @@ components:
           price: 100
           keywords:
             - dog toy
-          productCategories:
+          categories:
             - name: Dogs
               uri: /dogs
           reviewRating: 5
@@ -234,7 +387,7 @@ components:
           items:
             type: string
             example: dog toy
-        productCategories:
+        categories:
           type: array
           uniqueItems: true
           description: The links and names of the product categories to which the product belongs.
@@ -307,11 +460,11 @@ components:
         id: eo3hjmqtxvm9l
       type: object
       examples:
-        - self: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=bccf5512'
-          first: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=fa0a11ec'
-          prev: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=0242ac120'
-          next: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=651b1f06'
-          last: 'https://api.acme-pet-supplies.com/v1/catalog/product-categories?cursor=3a1893e2'
+        - self: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=bccf5512'
+          first: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=fa0a11ec'
+          prev: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=0242ac120'
+          next: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=651b1f06'
+          last: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=3a1893e2'
       description: An object containing pagination information
       properties:
         self:
@@ -336,6 +489,73 @@ components:
           description: Cursor to the last page.
       required:
         - self
+    Problem:
+      title: Problem
+      x-stoplight:
+        id: g0y7ze2gn7xip
+      type: object
+      examples:
+        - type: /problems/resource-not-found
+          title: Not Found
+          status: 404
+          detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
+          instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
+      properties:
+        type:
+          type: string
+          format: uri-reference
+          default: 'about:blank'
+          example: /problems/resource-not-found
+          description: A URI reference that identifies the problem type. It is recommended but not necessary that the URI should resolve to human-readable HTML documentation describing the type. The problem type provides information that is more specific than the HTTP status code.
+        title:
+          type: string
+          description: 'A short, human-readable description of the problem type. The title should be the same for given types.'
+          example: Not Found
+        status:
+          type: integer
+          format: int32
+          description: The HTTP status generated by the origin server.Conveys the HTTP status code used for the convenience of the consumer.
+          minimum: 100
+          exclusiveMaximum: 600
+          example: 404
+        detail:
+          type: string
+          description: 'A human-readable description of the problem instance, explaining why the problem occurred in this specific case. Should focus on helping the client correct the problem, rather than giving debugging information.'
+          example: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
+        instance:
+          type: string
+          description: A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced.
+          format: uri-reference
+          example: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
+      required:
+        - type
+        - title
+        - status
+    404NotFound:
+      $ref: '#/components/schemas/Problem'
+      description: Resource Not Found
+      examples:
+        - type: /problems/resource-not-found
+          title: Not Found
+          status: 404
+          detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
+          instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
+    403Forbidden:
+      $ref: '#/components/schemas/Problem'
+      examples:
+        - type: /problems/forbidden
+          title: Forbidden
+          status: 403
+          detail: You do not have permission to access this resource.
+          instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
+    401Unauthorized:
+      $ref: '#/components/schemas/Problem'
+      examples:
+        - type: /problems/unauthorized
+          title: Unauthorized
+          status: 401
+          detail: The request has NOT been successfully authenticated. Please check you have the right API credentials.
+          instance: /problems/unauthorized#log-22ce59a8-f263-4164-8d6d-18952a940748
   securitySchemes:
     apiKey:
       name: 142a3e7e-6075-40e8-9bad-136a136f335d
