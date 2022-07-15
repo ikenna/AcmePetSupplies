@@ -66,7 +66,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/403Forbidden'
               examples: {}
@@ -116,7 +116,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/401Unauthorized'
               examples:
@@ -130,7 +130,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/403Forbidden'
               examples:
@@ -202,7 +202,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/401Unauthorized'
               examples:
@@ -216,7 +216,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/403Forbidden'
               examples:
@@ -230,7 +230,7 @@ paths:
         '404':
           description: Not Found
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/404NotFound'
               examples:
@@ -283,7 +283,7 @@ paths:
         '401':
           description: Unauthorized
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/401Unauthorized'
               examples:
@@ -297,7 +297,7 @@ paths:
         '403':
           description: Forbidden
           content:
-            application/json:
+            application/problem+json:
               schema:
                 $ref: '#/components/schemas/403Forbidden'
               examples:
