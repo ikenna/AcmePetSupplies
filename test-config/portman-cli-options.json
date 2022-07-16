@@ -5,6 +5,6 @@
   "postmanConfigFile": "./test-config/postman-config.json",
   "includeTests": true,
   "bundleContractTests": true,
-  "syncPostman": false,
+  "syncPostman": true,
   "runNewman": false
 }

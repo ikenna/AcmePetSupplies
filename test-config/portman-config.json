@@ -14,6 +14,50 @@
           "enabled": true
         }
       }
+    ],
+    "variationTests": [
+      {
+        "openApiResponse": "401",
+        "variations": [
+          {
+            "name": "No API key provided",
+            "overwrites": [
+              {
+                "overwriteRequestHeaders": [
+                  {
+                    "key": "X-API-Key",
+                    "value": "",
+                    "overwrite": true
+                  }
+                ]
+              }
+            ],
+            "tests": {
+              "contractTests": [
+                {
+                  "statusCode": {
+                    "enabled": true
+                  },
+                  "jsonBody": {
+                    "enabled": true
+                  },
+                  "schemaValidation": {
+                    "enabled": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
     ]
+
+  },
+  "globals": {
+    "securityOverwrites": {
+      "apiKey": {
+        "value": "{{apikey}}"
+      }
+    }
   }
 }
