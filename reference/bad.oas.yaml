@@ -42,7 +42,6 @@ paths:
                   value:
                     data:
                       - name: Dogs
-                        categoryId: 1e32231d-b8a1-4145-b539-820301c2af64
                     pagination:
                       self: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=bccf5512'
                       first: 'https://api.acme-pet-supplies.com/v1/catalog/categories?cursor=fa0a11ec'
@@ -539,5 +538,3 @@ components:
       type: apiKey
       in: header
       description: API key
-security:
-  - ApiKeyAuth: []
