@@ -1,4 +1,4 @@
-name: API Commit Stage
+name: Commit Stage PR Action
 
 on: [pull_request]
 

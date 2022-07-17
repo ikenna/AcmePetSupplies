@@ -1,4 +1,4 @@
-name: API Commit Stage
+name: ommit Stage Merge Action
 
 on: 
   push: 
