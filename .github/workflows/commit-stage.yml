@@ -24,7 +24,7 @@ jobs:
         uses: stoplightio/spectral-action@latest
         with:
           file_glob: 'head/reference/*.oas.yaml'
-          spectral_ruleset: 'head/.spectral.yaml'
+          spectral_ruleset: 'head/reference/.spectral.yaml'
       - name: Check out master branch
         uses: actions/checkout@v3
         with:
