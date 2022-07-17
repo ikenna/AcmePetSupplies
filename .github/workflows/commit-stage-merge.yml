@@ -1,0 +1,60 @@
+name: API Commit Stage
+
+on: 
+  push: 
+    branches:
+      - main
+
+env:
+  run_number: ${GITHUB_RUN_NUMBER}
+
+permissions:
+  checks: write
+
+jobs:
+  commit-stage-merge:
+    name: Commit Stage Merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out pr branch
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Install Portman 
+        run: |
+          npm install -g @apideck/portman
+          portman --version
+      - name: Generate API unit tests
+        run: |
+          portman --cliOptionsFile test-config/portman-cli-options.json
+      - name: Install Newman  # TODO Replace with https://github.com/marketplace/actions/newman-action 
+        run: |
+          npm install -g newman
+          newman --version
+      - name: Run API unit tests (with Newman)
+        run: |
+          newman run output/test.postman.json 
+  publish-to-artifact-repo: # TODO zip artifacts (spec, generated tests, and postman collections)
+    name: Publish to artifact repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Check out master"
+        uses: actions/checkout@v3
+      - name: "Zip API definition, test and config"
+        run: |
+            zip artifacts.zip api.oas.yaml
+      - name: "Setup artifact repository CLI (Jfrog CLI)" 
+        uses: jfrog/setup-jfrog-cli@v2
+        env:
+          JF_ENV_1: ${{ secrets.JF_SECRET }}
+      - name: "Upload to artifact repository (Jfrog Artifactory)"
+        run: |
+            jf rt u artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
+            jf rt bp
+      
+
+
+
+

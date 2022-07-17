@@ -1,0 +1,51 @@
+name: API Commit Stage
+
+on: [pull_request]
+
+env:
+  run_number: ${GITHUB_RUN_NUMBER}
+
+permissions:
+  checks: write
+
+jobs:
+  commit-stage-pr-checks:
+    name: Commit Stage PR Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out pr branch
+        uses: actions/checkout@v3
+        with:
+          path: head
+      - name: "Run API linting (with Spectral)"
+        uses: stoplightio/spectral-action@latest
+        with:
+          file_glob: 'head/reference/*.oas.yaml'
+          spectral_ruleset: 'head/reference/.spectral.yaml'
+      - name: Check out main branch
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          path: base
+      - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
+        id: diff_state
+        uses: swimmwatch/openapi-diff-action@v1.0.0
+        with:
+          old-spec: base/reference/product-catalog-api.oas.yaml
+          new-spec: head/reference/product-catalog-api.oas.yaml
+          json: "out.json"
+          markdown: "out.md"
+      - name: "Upload OpenAPI-diff report as Github Artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: diff-reports
+          path: |
+            ./out.md
+            ./out.json
+      - name: "Fail if breaking change"
+        if: ${{ steps.diff_state.outputs.state == 'incompatible' }} 
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed("Failed due to breaking change! Diff state - ${{ steps.diff_state.outputs.state }} ")
+    
