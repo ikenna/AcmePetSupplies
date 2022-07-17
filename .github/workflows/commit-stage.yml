@@ -28,7 +28,7 @@ jobs:
       - name: Check out master branch
         uses: actions/checkout@v3
         with:
-          ref: master
+          ref: main
           path: base
       - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
         id: diff_state
