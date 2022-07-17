@@ -19,7 +19,8 @@ paths:
   /categories:
     get:
       summary: Get all Categories
-      tags: []
+      tags:
+        - Categories
       responses:
         '200':
           description: OK
@@ -77,7 +78,8 @@ paths:
     parameters: []
     get:
       summary: Get all Products
-      tags: []
+      tags:
+        - Products
       responses:
         '200':
           description: OK
@@ -153,7 +155,8 @@ paths:
         required: true
     get:
       summary: Get a Product
-      tags: []
+      tags:
+        - Products
       responses:
         '200':
           description: OK
@@ -223,7 +226,8 @@ paths:
     parameters: []
     get:
       summary: Get Product Reviews
-      tags: []
+      tags:
+        - Reviews
       responses:
         '200':
           description: OK
@@ -541,3 +545,10 @@ components:
       description: API key
 security:
   - ApiKeyAuth: []
+tags:
+  - name: Categories
+    description: A category is a class of products with common characteristics
+  - name: Products
+    description: A product is an item for sale on the store.
+  - name: Reviews
+    description: A review is a critical assesment of a product by a customer. 

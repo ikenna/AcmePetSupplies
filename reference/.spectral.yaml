@@ -12,12 +12,3 @@ rules:
       functionOptions:
         match: "^[a-z][a-z0-9\\-]*$"
 
-  acme-path-must-be-versioned:
-    description: Ensures that the path includes a version
-    message: Version should be in the path {{property}}
-    severity: error
-    given: "$.paths[*]~"
-    then:
-      function: pattern
-      functionOptions:
-        match: "\/v[0-9]\/.*$"
