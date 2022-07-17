@@ -1,7 +1,7 @@
 name: API Commit Stage
 
 on: 
-  push:  # Trigger on merge to master
+  push: 
     branches:
       - main
 
@@ -12,45 +12,12 @@ permissions:
   checks: write
 
 jobs:
-  commit-stage-checks:
-    name: Commit Stage Checks
+  commit-stage-merge:
+    name: Commit Stage Merge
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout out branch
+      - name: Checkout out pr branch
         uses: actions/checkout@v3
-        with:
-          path: head
-      - name: "Run API linting (with Spectral)"
-        uses: stoplightio/spectral-action@latest
-        with:
-          file_glob: 'head/reference/*.oas.yaml'
-          spectral_ruleset: 'head/reference/.spectral.yaml'
-      - name: Check out master branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
-          path: base
-      - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
-        id: diff_state
-        uses: swimmwatch/openapi-diff-action@v1.0.0
-        with:
-          old-spec: base/reference/product-catalog-api.oas.yaml
-          new-spec: head/reference/product-catalog-api.oas.yaml
-          json: "out.json"
-          markdown: "out.md"
-      - name: "Upload OpenAPI-diff report as Github Artifact"
-        uses: actions/upload-artifact@v3
-        with:
-          name: diff-reports
-          path: |
-            ./out.md
-            ./out.json
-      - name: "Fail if breaking change"
-        if: ${{ steps.diff_state.outputs.state == 'incompatible' }} 
-        uses: actions/github-script@v6
-        with:
-          script: |
-            core.setFailed("Failed due to breaking change! Diff state - ${{ steps.diff_state.outputs.state }} ")
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -61,14 +28,14 @@ jobs:
           portman --version
       - name: Generate API unit tests
         run: |
-          portman --cliOptionsFile head/test-config/portman-cli-options.json
+          portman --cliOptionsFile test-config/portman-cli-options.json
       - name: Install Newman  # TODO Replace with https://github.com/marketplace/actions/newman-action 
         run: |
           npm install -g newman
           newman --version
       - name: Run API unit tests (with Newman)
         run: |
-          newman run head/api.postman.json 
+          newman run output/test.postman.json 
   publish-to-artifact-repo: # TODO zip artifacts (spec, generated tests, and postman collections)
     name: Publish to artifact repo
     runs-on: ubuntu-latest
