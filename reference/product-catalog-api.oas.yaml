@@ -52,11 +52,11 @@ paths:
               examples:
                 example-1:
                   value:
-                    type: /problems/resource-not-found
-                    title: Not Found
-                    status: 404
-                    detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
-                    instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
+                    type: /problems/unauthorized
+                    title: Unauthorized
+                    status: 401
+                    detail: The request has NOT been successfully authenticated. Please check you have the right API credentials.
+                    instance: /problems/unauthorized#log-22ce59a8-f263-4164-8d6d-18952a940748
         '403':
           description: Forbidden
           headers: {}
