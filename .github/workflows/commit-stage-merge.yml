@@ -1,4 +1,4 @@
-name: ommit Stage Merge Action
+name: Commit Stage Merge Action
 
 on: 
   push: 
@@ -37,7 +37,7 @@ jobs:
           JF_ENV_1: ${{ secrets.JF_SECRET }}
       - name: "Upload to artifact repository (Jfrog Artifactory)"
         run: |
-            jf rt u artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
+            jf rt u artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip --url https://acmepetsupplies.jfrog.io/ 
             jf rt bp
       
 
