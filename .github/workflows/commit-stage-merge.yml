@@ -28,10 +28,6 @@ jobs:
       - name: Generate Postman collections for external consumers
         run: |
           portman --cliOptionsFile test-config/ci-portman-cli-options.json
-  publish-to-artifact-repo: 
-    name: Publish to artifact repo
-    runs-on: ubuntu-latest
-    steps:
       - name: "Zip API definition, Postman collection"
         run: |
             zip artifacts.zip reference/product-catalog-api.oas.yaml output/postman.collection.json
