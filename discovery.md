@@ -49,6 +49,11 @@ John Smith
 
 # Web Resources
 
+A category is a class of products with common characteristics. A category can contain zero or more products. 
+A product is an item for sale on the store. A product belongs to at least one category and has zero or more reviews. 
+A review is a critical assesment of a product by a customer. A revivew is associated to one and only one product.
+
+
 ```mermaid
 erDiagram
   PRODUCT { 
@@ -87,7 +92,7 @@ erDiagram
 
 ```mermaid
 erDiagram
-    PRODUCT ||--|{ CATEGORY : associated_with
+    PRODUCT }o--|{ CATEGORY : associated_with
     PRODUCT ||--o{ REVIEW : has_a
 ```
 

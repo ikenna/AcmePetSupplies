@@ -59,6 +59,9 @@ jobs:
         run: |
           npm install -g @apideck/portman
           portman --version
+      - name: Generate API unit tests
+        run: |
+          portman --cliOptionsFile test-config/portman-cli-options.json
       - name: Install Newman  # TODO Replace with https://github.com/marketplace/actions/newman-action 
         run: |
           npm install -g newman
