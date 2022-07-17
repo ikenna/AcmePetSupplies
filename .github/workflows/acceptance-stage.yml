@@ -25,16 +25,24 @@ jobs:
       - name: Install Portman 
         run: |
           npm install -g @apideck/portman
-      - name: Generate Postman collections for external consumers
+      - name: Generate API unit tests
         run: |
-          portman --cliOptionsFile test-config/ci-portman-cli-options.json
-  publish-to-artifact-repo: 
+          portman --cliOptionsFile test-config/portman-cli-options.json
+      - name: Install Newman  # TODO Replace with https://github.com/marketplace/actions/newman-action 
+        run: |
+          npm install -g newman
+      - name: Run API unit tests (with Newman)
+        run: |
+          newman run output/tests.postman.json 
+  publish-to-artifact-repo: # TODO zip artifacts (spec, generated tests, and postman collections)
     name: Publish to artifact repo
     runs-on: ubuntu-latest
     steps:
-      - name: "Zip API definition, Postman collection"
+      - name: "Check out master"
+        uses: actions/checkout@v3
+      - name: "Zip API definition, test and config"
         run: |
-            zip artifacts.zip reference/product-catalog-api.oas.yaml output/postman.collection.json
+            zip artifacts.zip api.oas.yaml
       - name: "Setup artifact repository CLI (Jfrog CLI)" 
         uses: jfrog/setup-jfrog-cli@v2
         env:
