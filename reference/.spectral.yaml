@@ -2,7 +2,7 @@ extends: ["spectral:oas"]
 
 rules:
   
-  acme-path-pattern-with-hyphens:
+  acme-ensure-paths-kebab-case:
     description: Ensures URI paths are in kebab case
     message: "Path {{property}} should be in kebab case"
     severity: error
@@ -10,5 +10,5 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-z0-9\\-]*$"
+        match: "^(\/|[a-z0-9-.]+|{[a-zA-Z0-9]+})+$"
 
