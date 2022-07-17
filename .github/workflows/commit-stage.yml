@@ -23,7 +23,7 @@ jobs:
       - name: "Run API linting (with Spectral)"
         uses: stoplightio/spectral-action@latest
         with:
-          file_glob: 'head/*.oas.yaml'
+          file_glob: 'head/reference/*.oas.yaml'
           spectral_ruleset: 'head/.spectral.yaml'
       - name: Check out master branch
         uses: actions/checkout@v3

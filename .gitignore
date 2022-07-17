@@ -1,3 +1,5 @@
 .env
 output/
+output/tests.postman.json
 tmp
+scratch
