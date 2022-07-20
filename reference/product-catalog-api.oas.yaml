@@ -251,7 +251,7 @@ paths:
                       content: This dog toy is great! My dog loved to play with it. I thoroughly recommend.
                       rating: 5
                       authorName: Jill Baker
-                      submittedDate: 2022-04-12T23:20:50.52Z
+                      submittedDate: "2022-04-12T23:20:50.52Z"
                       productId: dcd53ddb-8104-4e48-8cc0-5df1088c6113
                     pagination:
                       self: https://api.acme-pet-supplies.com/v1/catalog/reviews?cursor=bccf5512
