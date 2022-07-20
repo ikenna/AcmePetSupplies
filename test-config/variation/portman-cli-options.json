@@ -1,0 +1,12 @@
+{
+  "local": "./reference/product-catalog-api.oas.yaml",
+  "output": "./output/variation/tests.postman.json",
+  "portmanConfigFile": "./test-config/variation/portman-config.json",
+  "postmanConfigFile": "./test-config/variation/postman-config.json",
+  "envFile":  "./test-config/variation/variation.env",
+  "includeTests": true,
+  "syncPostman": true,
+  "runNewman": false,
+  "collectionName": "Product Catalog [Variation Tests]"
+  
+}

@@ -1,0 +1,42 @@
+{
+  "version": 1.0,
+  "tests": {
+
+
+    "variationTests": [
+      {
+        "openApiOperation": "*::/*",
+        "openApiResponse": "401",        
+        "variations": [
+          {
+            "name": "Incorrect API key",
+            "openApiResponse": "401",
+      
+            "tests": {
+              "contractTests": [
+                {
+                  "statusCode": {
+                    "enabled": true
+                  },
+                  "jsonBody": {
+                    "enabled": true
+                  },
+                  "schemaValidation": {
+                    "enabled": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "globals": {
+    "securityOverwrites": {
+      "apiKey": {
+        "value": "{{apikey}}"
+      }
+    }
+  }
+}

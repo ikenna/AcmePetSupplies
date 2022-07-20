@@ -1,0 +1,45 @@
+{
+  "version": 1.0,
+  "tests": {
+    "contractTests": [
+      {
+        "openApiOperation": "*::/*",
+        "statusSuccess": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "schemaValidation": {
+          "enabled": true,
+          "additionalProperties": false
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "jsonBody": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "headersPresent": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "contentType": {
+          "enabled": true
+        }
+      }
+    ]
+  },
+  "globals": {
+    "securityOverwrites": {
+      "apiKey": {
+        "value": "{{apikey}}"
+      }
+    }
+  }
+}
