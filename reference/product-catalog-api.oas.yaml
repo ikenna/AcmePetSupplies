@@ -8,13 +8,15 @@ info:
     email: "john.smith@acme-pet-supplies.co.uk"
   version: '1.0'
 servers:
-- url: '{serverurl}'
-  variables:
-    serverurl:
-      default: https://api.acme-pet-supplies.com/v1/catalog
-      description: The prod API environment.
+  - url: 'http://{host}:{port}'
+    variables:
+      host:
+        default: localhost
+      port: 
+        default: '8000'
+  
 paths:
-  /categories:
+  /v1/catalog/categories:
     get:
       tags:
       - Categories
@@ -73,7 +75,7 @@ paths:
                     detail: You do not have permission to access this resource.
                     instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
       deprecated: false
-  /products:
+  /v1/catalog/products:
     get:
       tags:
       - Products
@@ -141,7 +143,7 @@ paths:
                     detail: You do not have permission to access this resource.
                     instance: /problems/forbidden#log-22ce59a8-f263-4164-8d6d-18952a940748
       deprecated: false
-  /products/{productId}:
+  /v1/catalog/products/{productId}:
     get:
       tags:
       - Products
@@ -225,7 +227,7 @@ paths:
                     detail: The requested resource with ID '651295a4-40da-4742-a567-8fdddf6898c1' is not found. Please check you are requesting the right resource.
                     instance: /problems/resource-not-found#log-22ce59a8-f263-4164-8d6d-18952a940748
       deprecated: false
-  /reviews:
+  /v1/catalog/reviews:
     get:
       tags:
       - Reviews
