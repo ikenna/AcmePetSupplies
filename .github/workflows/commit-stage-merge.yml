@@ -18,10 +18,11 @@ jobs:
     steps:
       - name: Checkout out pr branch
         uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - name: Run API linting (with Spectral)
+        uses: stoplightio/spectral-action@latest
         with:
-          node-version: 14
+          file_glob: 'reference/*.oas.yaml'
+          spectral_ruleset: 'reference/.spectral.yaml'
       - name: Install Portman 
         run: |
           npm install -g @apideck/portman
