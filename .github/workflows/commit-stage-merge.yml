@@ -38,5 +38,4 @@ jobs:
       - name: "Upload to artifact repository (Jfrog Artifactory)"
         run: |
             jf rt ping
-            jf rt u artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip 
-            jf rt bp
+            jf rt upload artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
