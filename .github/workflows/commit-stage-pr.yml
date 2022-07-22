@@ -40,7 +40,6 @@ jobs:
           json: "diff.json"
           markdown: "diff.md"
           text: "diff.txt"
-          html: "diff.html"
       - name: "Upload OpenAPI-diff report as Github Artifact"
         uses: actions/upload-artifact@v3
         with:
