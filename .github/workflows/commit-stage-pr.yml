@@ -27,6 +27,10 @@ jobs:
         with:
           ref: main
           path: base
+      - name: View working folder
+        run: |
+          ls -lash
+          tree
       - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
         id: diff_state
         uses: swimmwatch/openapi-diff-action@v1.0.0
@@ -45,7 +49,6 @@ jobs:
             ./diff.md
             ./diff.json
             ./diff.txt
-            ./diff.html
       - name: "Fail if breaking change"
         if: ${{ steps.diff_state.outputs.state == 'incompatible' }} 
         uses: actions/github-script@v6
