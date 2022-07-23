@@ -21,8 +21,8 @@ jobs:
       - name: Run API linting (with Spectral)
         uses: stoplightio/spectral-action@latest
         with:
-          file_glob: 'reference/*.oas.yaml'
-          spectral_ruleset: 'reference/.spectral.yaml'
+          file_glob: 'api-definitions/*.oas.yaml'
+          spectral_ruleset: 'api-definitions/.spectral.yaml'
       - name: Install Portman 
         run: |
           npm install -g @apideck/portman
@@ -31,7 +31,7 @@ jobs:
           portman --cliOptionsFile test-config/ci-portman-cli-options.json
       - name: "Zip API definition, Postman collection"
         run: |
-            zip artifacts.zip reference/product-catalog-api.oas.yaml output/postman.collection.json
+            zip artifacts.zip api-definitions/product-catalog-api.oas.yaml output/postman.collection.json
       - name: "Setup artifact repository CLI (Jfrog CLI)" 
         uses: jfrog/setup-jfrog-cli@v2
         env:

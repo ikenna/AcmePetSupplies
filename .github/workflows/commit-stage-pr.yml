@@ -20,8 +20,8 @@ jobs:
       - name: "Run API linting (with Spectral)"
         uses: stoplightio/spectral-action@latest
         with:
-          file_glob: 'head/reference/*.oas.yaml'
-          spectral_ruleset: 'head/reference/.spectral.yaml'
+          file_glob: 'head/api-definitions/*.oas.yaml'
+          spectral_ruleset: 'head/api-definitions/.spectral.yaml'
       - name: Check out main branch
         uses: actions/checkout@v3
         with:
@@ -35,8 +35,8 @@ jobs:
         id: diff_state
         uses: swimmwatch/openapi-diff-action@v1.0.0
         with:
-          old-spec: base/reference/product-catalog-api.oas.yaml
-          new-spec: head/reference/product-catalog-api.oas.yaml
+          old-spec: base/api-definitions/product-catalog-api.oas.yaml
+          new-spec: head/api-definitions/product-catalog-api.oas.yaml
           json: "diff.json"
           markdown: "diff.md"
           text: "diff.txt"
