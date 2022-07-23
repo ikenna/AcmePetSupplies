@@ -9,6 +9,6 @@
   "runNewman": true,
   "collectionName": "Product Catalog [Contract Tests]",
   "newmanRunOptions": {
-    "abortOnFailure": true
+    "abortOnFailure": false
   } 
 }
