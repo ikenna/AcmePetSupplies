@@ -1,5 +1,5 @@
 {
-  "local": "api-definitions/compliant-product-catalog-api.oas.yaml",
+  "local": "./api-definitions/product-catalog-api.oas.yaml",
   "output": "./output/variation/tests.postman.json",
   "portmanConfigFile": "./test-config/variation/portman-config.json",
   "postmanConfigFile": "./test-config/variation/postman-config.json",
