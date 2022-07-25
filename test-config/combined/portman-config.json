@@ -1,0 +1,84 @@
+{
+  "version": 1.0,
+  "tests": {
+
+    "contractTests": [
+      {
+        "openApiOperation": "*::/*",
+        "statusSuccess": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "schemaValidation": {
+          "enabled": true,
+          "additionalProperties": false
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "jsonBody": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "headersPresent": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "contentType": {
+          "enabled": true
+        }
+      }
+    ],
+
+
+    "variationTests": [
+      {
+        "openApiOperation": "*::/*",
+        "openApiResponse": "401",        
+        "variations": [
+          {
+            "name": "Incorrect API key",
+            "openApiResponse": "401",
+            "overwrites": [
+              {
+                "overwriteRequestSecurity": {
+                  "apiKey": {
+                    "value": "bogus_key"
+                  }
+                }
+              }
+            ],
+            "tests": {
+              "contractTests": [
+                {
+                  "statusCode": {
+                    "enabled": true
+                  },
+                  "jsonBody": {
+                    "enabled": true
+                  },
+                  "schemaValidation": {
+                    "enabled": true
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "globals": {
+    "securityOverwrites": {
+      "apiKey": {
+        "value": "{{apikey}}"
+      }
+    }
+  }
+}

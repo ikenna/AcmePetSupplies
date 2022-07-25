@@ -1,0 +1,14 @@
+{
+  "local": "./api-definitions/product-catalog-api.oas.yaml",
+  "output": "./output/combined/tests.postman.json",
+  "portmanConfigFile": "./test-config/combined/portman-config.json",
+  "postmanConfigFile": "./test-config/combined/postman-config.json",
+  "envFile":  "./test-config/contract/contract.env",
+  "includeTests": true,
+  "syncPostman": false,
+  "runNewman": true,
+  "collectionName": "Product Catalog [Combined Tests]",
+  "newmanRunOptions": {
+    "abortOnFailure": true
+  }
+}
