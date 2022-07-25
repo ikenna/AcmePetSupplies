@@ -1,7 +1,7 @@
 name: Commit Stage Merge Action
 
-on: 
-  push: 
+on:
+  push:
     branches:
       - main
 
@@ -21,22 +21,22 @@ jobs:
       - name: Run API linting (with Spectral)
         uses: stoplightio/spectral-action@latest
         with:
-          file_glob: 'api-definitions/*.oas.yaml'
-          spectral_ruleset: 'api-definitions/.spectral.yaml'
-      - name: Install Portman 
+          file_glob: "api-definitions/*.oas.yaml"
+          spectral_ruleset: "api-definitions/.spectral.yaml"
+      - name: Install Portman
         run: |
-          npm install -g @apideck/portman
+          npm list @apideck/portman || npm install -g @apideck/portman
       - name: Generate Postman collections for external consumers
         run: |
           portman --cliOptionsFile test-config/ci-portman-cli-options.json
       - name: "Zip API definition, Postman collection"
         run: |
-            zip artifacts.zip api-definitions/product-catalog-api.oas.yaml output/postman.collection.json
-      - name: "Setup artifact repository CLI (Jfrog CLI)" 
+          zip artifacts.zip api-definitions/product-catalog-api.oas.yaml output/postman.collection.json
+      - name: "Setup artifact repository CLI (Jfrog CLI)"
         uses: jfrog/setup-jfrog-cli@v2
         env:
           JF_ENV_1: ${{ secrets.JF_SECRET }}
       - name: "Upload to artifact repository (Jfrog Artifactory)"
         run: |
-            jf rt ping
-            jf rt upload artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
+          jf rt ping
+          jf rt upload artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
