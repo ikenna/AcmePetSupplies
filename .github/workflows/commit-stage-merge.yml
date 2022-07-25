@@ -40,3 +40,10 @@ jobs:
         run: |
           jf rt ping
           jf rt upload artifacts.zip default-api-generic-local/com.acmeps/product-catalog-api/artifacts.${{ env.run_number }}.zip
+      - name: Invoke acceptance test workflow 
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Run acceptance stage tests
+          repo: ikenna/acme-pet-supplies-config
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          
