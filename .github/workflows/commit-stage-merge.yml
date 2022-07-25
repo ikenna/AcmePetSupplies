@@ -45,5 +45,6 @@ jobs:
         with:
           workflow: Contract Test Workflow
           repo: ikenna/acme-pet-supplies-config
+          ref: master
           token: ${{ secrets.PERSONAL_TOKEN }}
           
