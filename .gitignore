@@ -5,3 +5,4 @@ tmp
 scratch
 test-reports
 *.log
+.hypothesis
