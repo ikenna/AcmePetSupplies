@@ -1,0 +1,3 @@
+
+pip3 install schemathesis
+st run --checks all api-definitions/product-catalog-api.oas.yaml --base-url http://127.0.0.1:4010/ -H "X-API-Key: wbAR96yWdJROJmhL0VEdFu5fRDQrp0pw" 

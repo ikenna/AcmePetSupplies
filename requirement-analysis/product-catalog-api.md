@@ -38,7 +38,7 @@ Secure the API with an API key to identify the application channel the traffic i
 # API product manager
 John Smith
 
-# API operation profile
+# API operations
 |User Tasks| Operation Name| Operation Description |Participant| Web Resource | Request | Response | HTTP Method| Resource Path| Response Code|   
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 |Browse for products| listCategories |List all categories. | Customer | Category | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET | /categories | 200 |
