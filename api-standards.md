@@ -6,7 +6,7 @@
 
 URIs MUST be in kebab case (lowercase, spearated by hyphens).
 
-#### Example:
+#### Example
 
 `/product-categories`
 
@@ -14,7 +14,7 @@ URIs MUST be in kebab case (lowercase, spearated by hyphens).
 
 ### [S2] OpenAPI opearation IDs must be in camel case
 
-#### Example:
+#### Example
 
 `operationId: ListItems`
 
