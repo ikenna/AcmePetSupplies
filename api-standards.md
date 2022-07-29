@@ -2,7 +2,7 @@
 
 ## REST URIs
 
-### [S1] URIs MUST be kebab case.
+### [S1] URIs MUST be kebab case
 
 URIs MUST be in kebab case (lowercase, spearated by hyphens).
 
@@ -12,7 +12,7 @@ URIs MUST be in kebab case (lowercase, spearated by hyphens).
 
 ## Operations
 
-### [S2] OpenAPI opearation IDs must be in camel case.
+### [S2] OpenAPI opearation IDs must be in camel case
 
 #### Example:
 
@@ -26,7 +26,7 @@ Collections of data items MUST support pagination to protect the server and enab
 
 APIs MUST use cursor based pagination. Each page of the result set has a a unique cursor, an opaque value used to identify and iterate through pages.
 
-#### Displaying pagination information.
+#### Displaying pagination information
 
 - 'data': Items in the result set.
 - 'meta': an object containing pagination information.
