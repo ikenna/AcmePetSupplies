@@ -99,26 +99,35 @@ erDiagram
 
 # API Sequence diagram
 
-
-
 ```mermaid 
 sequenceDiagram
-    Customer ->>+ Product Catalog API: listCategories()
-    Product Catalog API ->>+ Category Microservice: listCategories()
-    Category Microservice -->>- Product Catalog API :  Category[]
-    Product Catalog API -->>- Customer:  Category[]
-    Customer ->>+ Product Catalog API: listProducts()
-    Product Catalog API ->>+ Product Microservice: listProducts()
-    Product Microservice -->>- Product Catalog API :  Product[], paginationInfo
-    Product Catalog API -->>- Customer:  Product[], paginationInfo
-    Customer ->>+ Product Catalog API: viewProduct()
-    Product Catalog API ->>+ Product Microservice: viewProduct()
-    Product Microservice -->>- Product Catalog API:  Product
-    Product Catalog API -->>- Customer:  Product
-    Customer ->>+ Product Catalog API: listReviews()
-    Product Catalog API ->>+ Reviews Microsrevice: listReviews()
-    Reviews Microsrevice -->>- Product Catalog API: Reviews[], paginationInfo
-    Product Catalog API -->>- Customer:  Reviews[], paginationInfo
+    Customer ->>+ API Gateway: listCategories()
+    API Gateway ->>+ Product Catalog API Service : listCategories()
+    Product Catalog API Service ->>+ Category Microservice: listCategories()
+    Category Microservice -->>- Product Catalog API Service :  Category[]
+    Product Catalog API Service -->>- API Gateway:  Category[]
+    API Gateway -->>- Customer:  Category[]
+
+    Customer ->>+ API Gateway: listProducts()
+    API Gateway ->>+ Product Catalog API Service: listProducts()
+    Product Catalog API Service ->>+ Product Microservice: listProducts()
+    Product Microservice -->>- Product Catalog API Service :  Product[], paginationInfo
+    Product Catalog API Service -->>- API Gateway :  Product[], paginationInfo
+    API Gateway -->>- Customer:  Product[], paginationInfo
+
+    Customer ->>+ API Gateway: viewProduct()
+    API Gateway ->>+ Product Catalog API Service: viewProduct()
+    Product Catalog API Service ->>+ Product Microservice: viewProduct()
+    Product Microservice -->>- Product Catalog API Service:  Product
+    Product Catalog API Service -->>- API Gateway:  Product
+    API Gateway -->>- Customer:  Product
+
+    Customer ->>+ API Gateway: listReviews()
+    API Gateway ->>+ Product Catalog API Service: listReviews()
+    Product Catalog API Service ->>+ Reviews Microsrevice: listReviews()
+    Reviews Microsrevice -->>- Product Catalog API Service: Reviews[], paginationInfo
+    Product Catalog API Service -->>- API Gateway:  Reviews[], paginationInfo
+    API Gateway -->>- Customer:  Reviews[], paginationInfo
    
 ```            
 
