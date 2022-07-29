@@ -80,7 +80,7 @@ jobs:
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JSCPD: false
+          VALIDATE_JSCPD: true
           YAML_CONFIG_FILE: .yaml-lint.yml
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
