@@ -1,4 +1,4 @@
-name: Commit Stage Merge Action
+name: Commit Stage Merge Workflow
 
 on:
   push:
