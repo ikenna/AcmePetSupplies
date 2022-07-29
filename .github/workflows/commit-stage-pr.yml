@@ -64,6 +64,6 @@ jobs:
         with:
           api-token: ${{ secrets.CRUNCH_API_TOKEN }}
           min-score: 85
-          root-directory: ./api-definitions
+          entryPoint: ./api-definitions
           
     
