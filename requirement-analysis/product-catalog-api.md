@@ -12,7 +12,7 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 2. The Acme web store (Acme channel)
 3. An affiliate's store.
 
-## Job Stories (core problem solving benefit)
+## Job Stories
 
 When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
 
