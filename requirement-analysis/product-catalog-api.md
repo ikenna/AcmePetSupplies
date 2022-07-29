@@ -1,8 +1,10 @@
-# API product name
+# API Profile
+
+## API Product Name
 
 Product Catalog API
 
-# API Consumer
+## API Consumer
 
 The end user is a customer browsing Acme Pet Supplies products in order to make a purchase. They may do this via 3 main channels:
 
@@ -10,38 +12,40 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 2. The Acme web store (Acme channel)
 3. An affiliate's store.
 
-# Job Stories (core problem solving benefit)
+## Job Stories
 
 When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
 
-# User tasks
+## User Tasks
 
 - Browse for pet products in the Acme catalog. (MVP)
 - Search for pet products in the Acme catalog. (Phase 2)
 
-# API Technology Solution and Versioning Strategy
+## API Technology Solution and Versioning Strategy
 
 This is a REST API. It will use path level versioning
 
-# Access Level
+## Access Level
 
 Public API, made available for use by both Acme owned digital channels and to registered affiliates.
 
-# Usage plans
+## Usage Plans
 
 - **Acme mobile app:** 5 requests a minute
 - **Acme web store :** 5 requests a minute
 - **Affiliate stores:** 4 requests a minute
 
-# Security model
+## Security Model
 
 Secure the API with an API key to identify the application channel the traffic is coming from. API keys will be generated and managed via the dev portal.
 
-# API product manager
+## API Product Manager
 
 John Smith
 
-# API operations
+# API Model
+
+## API Operations
 
 | User Tasks          | Operation Name | Operation Description     | Participant | Web Resource | Request                                                                 | Response                   | HTTP Method | Resource Path         | Response Code |
 | ------------------- | -------------- | ------------------------- | ----------- | ------------ | ----------------------------------------------------------------------- | -------------------------- | ----------- | --------------------- | ------------- |
@@ -50,7 +54,7 @@ John Smith
 | Browse for products | viewProduct    | View a product's details. | Customer    | Product      | Product ID                                                              | Product                    | GET         | /products/{productId} | 200           |
 | Browse for products | listReviews    | Get all reviews.          | Customer    | Review       | Filter by field, sort by field, order direction, page size, page cursor | Reviews[], PaginationInfo  | GET         | /reviews              | 200           |
 
-# Web Resources
+## Web Resources
 
 A category is a class of products with common characteristics. A category can contain zero or more products.
 A product is an item for sale on the store. A product belongs to at least one category and has zero or more reviews.
@@ -90,7 +94,7 @@ erDiagram
   }
 ```
 
-# Web Resource Relationships
+## Web Resource Relationships
 
 ```mermaid
 erDiagram

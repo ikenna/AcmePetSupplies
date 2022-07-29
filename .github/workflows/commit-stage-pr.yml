@@ -1,6 +1,10 @@
-name: Commit Stage PR Action
+name: Commit Stage Pull Request Workflow
 
-on: [pull_request]
+on: 
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
 
 env:
   run_number: ${GITHUB_RUN_NUMBER}
@@ -10,7 +14,7 @@ permissions:
 
 jobs:
   commit-stage-pr-checks:
-    name: Commit Stage PR Checks
+    name: Commit Stage PR Checks Job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout out pr branch
@@ -33,7 +37,8 @@ jobs:
           tree
       - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
         id: diff_state
-        uses: swimmwatch/openapi-diff-action@v1.0.0
+        # https://github.com/swimmwatch/openapi-diff-action
+        uses: swimmwatch/openapi-diff-action@v1.0.1
         with:
           old-spec: base/api-definitions/product-catalog-api.oas.yaml
           new-spec: head/api-definitions/product-catalog-api.oas.yaml
@@ -54,4 +59,10 @@ jobs:
         with:
           script: |
             core.setFailed("Failed due to breaking change! Diff state - ${{ steps.diff_state.outputs.state }} ")
+      - name: "Run OpenAPI security audit"
+        uses: 42Crunch/api-security-audit-action@v3
+        with:
+          api-token: ${{ secrets.CRUNCH_API_TOKEN }}
+          min-score: 85
+          
     
