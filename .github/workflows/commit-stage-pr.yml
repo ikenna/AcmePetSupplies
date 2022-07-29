@@ -1,6 +1,10 @@
 name: Commit Stage Pull Request Workflow
 
-on: [pull_request]
+on: 
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
 
 env:
   run_number: ${GITHUB_RUN_NUMBER}
