@@ -358,15 +358,19 @@ components:
       properties:
         self:
           type: string
+          format: uri
           description: Cursor pointing to the current page.
         first:
           type: string
+          format: uri
           description: Cursor to the first page.
         prev:
           type: string
+          format: uri
           description: Cursor to the previous page.
         next:
           type: string
+          format: uri
           description: Cursor to the next page.
         last:
           type: string
