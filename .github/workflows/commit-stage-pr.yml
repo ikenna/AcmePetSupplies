@@ -95,7 +95,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - name: View all files
         run: tree
@@ -108,17 +107,15 @@ jobs:
       - name: Lint using Super Linter
         uses: github/super-linter/slim@v4
         env:
-          VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JSCPD: true
+          DEFAULT_BRANCH: main
           VALIDATE_MARKDOWN: true
-          VALIDATE_OPENAPI: true
           VALIDATE_YAML: true
+          YAML_CONFIG_FILE: .yaml-lint.yml
           VALIDATE_JSON: true
           VALIDATE_ENV: true
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
-          YAML_CONFIG_FILE: .yaml-lint.yml
-          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
     

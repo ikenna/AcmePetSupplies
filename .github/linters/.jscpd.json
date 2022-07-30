@@ -1,8 +1,0 @@
-{
-  "threshold": 15,
-  "reporters": ["consoleFull"],
-  "ignore": ["**/__snapshots__/**"],
-  "absolute": true,
-  "format": "yaml",
-  "pattern": "api-definitions/*.yaml"
-}
