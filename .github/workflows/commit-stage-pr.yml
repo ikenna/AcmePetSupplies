@@ -89,7 +89,7 @@ jobs:
           default-collection-name: Product Catalog API
 
   commit-stage-lint-code-base:
-    name: Lint Code Base Job
+    name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -99,7 +99,13 @@ jobs:
           fetch-depth: 0
       - name: View all files
         run: tree
-      - name: Lint Code Base
+      - name: Lint guide docs prose
+        uses: errata-ai/vale-action@reviewdog
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          files: docs/
+      - name: Lint using Super Linter
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: true
