@@ -99,12 +99,12 @@ jobs:
           fetch-depth: 0
       - name: View all files
         run: tree
-      # - name: Lint guide docs prose
-      #   uses: errata-ai/vale-action@reviewdog
-      #   env:
-      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      #   with:
-      #     files:  '["docs", "requirements/product-catalog-api.md"]'
+      - name: Lint guide docs prose
+        uses: errata-ai/vale-action@reviewdog
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          files:  '["docs"]'
       - name: Lint using Super Linter
         uses: github/super-linter@slim-v4
         env:
@@ -117,8 +117,6 @@ jobs:
           VALIDATE_ENV: true
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
-          VALIDATE_NATURAL_LANGUAGE: true
-          NATURAL_LANGUAGE_CONFIG_FILE: .textlintrc
           YAML_CONFIG_FILE: .yaml-lint.yml
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
