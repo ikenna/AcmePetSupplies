@@ -106,7 +106,7 @@ jobs:
       #   with:
       #     files:  '["docs", "requirements/product-catalog-api.md"]'
       - name: Lint using Super Linter
-        uses: github/super-linter@v4
+        uses: github/super-linter@slim-v4
         env:
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JSCPD: true
