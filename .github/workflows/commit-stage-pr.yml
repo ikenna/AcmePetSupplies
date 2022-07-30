@@ -86,6 +86,7 @@ jobs:
         with:
           api-token: ${{ secrets.CRUNCH_API_TOKEN }}
           min-score: 85
+          default-collection-name: Product Catalog API
 
   commit-stage-lint-code-base:
     name: Lint Code Base Job
