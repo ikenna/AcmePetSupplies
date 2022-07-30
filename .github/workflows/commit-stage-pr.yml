@@ -89,7 +89,7 @@ jobs:
           default-collection-name: Product Catalog API
 
   commit-stage-lint-code-base:
-    name: Lint Code Base Job
+    name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -99,11 +99,26 @@ jobs:
           fetch-depth: 0
       - name: View all files
         run: tree
-      - name: Lint Code Base
-        uses: github/super-linter@v4
+      # - name: Lint guide docs prose
+      #   uses: errata-ai/vale-action@reviewdog
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      #   with:
+      #     files:  '["docs", "requirements/product-catalog-api.md"]'
+      - name: Lint using Super Linter
+        uses: github/super-linter@slim-v4
         env:
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JSCPD: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_OPENAPI: true
+          VALIDATE_YAML: true
+          VALIDATE_JSON: true
+          VALIDATE_ENV: true
+          VALIDATE_BASH: true
+          VALIDATE_BASH_EXEC: true
+          VALIDATE_NATURAL_LANGUAGE: true
+          NATURAL_LANGUAGE_CONFIG_FILE: .textlintrc
           YAML_CONFIG_FILE: .yaml-lint.yml
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
