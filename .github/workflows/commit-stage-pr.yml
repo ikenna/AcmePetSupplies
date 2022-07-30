@@ -82,11 +82,10 @@ jobs:
           ls -lash
           tree
       - name: "Run OpenAPI security audit"
-        uses: 42Crunch/api-security-audit-action@v2
+        uses: 42Crunch/api-security-audit-action@v3
         with:
           api-token: ${{ secrets.CRUNCH_API_TOKEN }}
           min-score: 85
-          default-collection-name: Product Catalog API
 
   commit-stage-lint-code-base:
     name: Lint Markdown, shell scripts and config files
