@@ -86,41 +86,35 @@ jobs:
         with:
           api-token: ${{ secrets.CRUNCH_API_TOKEN }}
           min-score: 85
-          default-collection-name: Product Catalog API
 
   commit-stage-lint-code-base:
-    name: Lint Code Base
+    name: Lint Markdown, shell scripts and config files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
       - name: View all files
         run: tree
-      # - name: Lint guide docs prose
-      #   uses: errata-ai/vale-action@reviewdog
-      #   env:
-      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      #   with:
-      #     files:  '["docs", "requirements/product-catalog-api.md"]'
-      - name: Lint using Super Linter
-        uses: github/super-linter@slim-v4
+      - name: Lint guide docs prose
+        uses: errata-ai/vale-action@reviewdog
         env:
-          VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JSCPD: true
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          files:  '["docs"]'
+      - name: Lint using Super Linter
+        uses: github/super-linter/slim@v4
+        env:
+          DEFAULT_BRANCH: main
           VALIDATE_MARKDOWN: true
-          VALIDATE_OPENAPI: true
           VALIDATE_YAML: true
+          YAML_CONFIG_FILE: .yaml-lint.yml
           VALIDATE_JSON: true
           VALIDATE_ENV: true
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
-          VALIDATE_NATURAL_LANGUAGE: true
-          NATURAL_LANGUAGE_CONFIG_FILE: .textlintrc
-          YAML_CONFIG_FILE: .yaml-lint.yml
-          DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
     
