@@ -104,7 +104,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          files: docs/
+          files:  '["docs", "requirements/product-catalog-api.md"]'
       - name: Lint using Super Linter
         uses: github/super-linter@v4
         env:
