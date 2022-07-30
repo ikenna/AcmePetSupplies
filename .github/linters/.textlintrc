@@ -3,6 +3,12 @@
     "comments": true
   },
   "rules": {
-    "terminology": true
+    "terminology": true,
+    "en-spell": true,
+    "en-capitalization": true,
+    "apostrophe": true,
+    "unexpanded-acronym": {
+      "min_acronym_len": 3
+    }
   }
 }
