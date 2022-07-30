@@ -13,19 +13,30 @@ permissions:
   checks: write
 
 jobs:
-  commit-stage-pr-checks:
-    name: Commit Stage PR Checks Job
+  commit-stage-open-api-lint:
+    name: Lint Open API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out pr branch
+        uses: actions/checkout@v3
+      - name: View working folder
+        run: |
+          ls -lash
+          tree
+      - name: "Run API linting (with Spectral)"
+        uses: stoplightio/spectral-action@latest
+        with:
+          file_glob: 'api-definitions/*.oas.yaml'
+          spectral_ruleset: 'api-definitions/.spectral.yaml'
+
+  commit-stage-breaking-change-check:
+    name: Breaking Change Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout out pr branch
         uses: actions/checkout@v3
         with:
           path: head
-      - name: "Run API linting (with Spectral)"
-        uses: stoplightio/spectral-action@latest
-        with:
-          file_glob: 'head/api-definitions/*.oas.yaml'
-          spectral_ruleset: 'head/api-definitions/.spectral.yaml'
       - name: Check out main branch
         uses: actions/checkout@v3
         with:
@@ -59,6 +70,17 @@ jobs:
         with:
           script: |
             core.setFailed("Failed due to breaking change! Diff state - ${{ steps.diff_state.outputs.state }} ")
+
+  commit-stage-security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout out pr branch
+        uses: actions/checkout@v3
+      - name: View working folder
+        run: |
+          ls -lash
+          tree
       - name: "Run OpenAPI security audit"
         uses: 42Crunch/api-security-audit-action@v3
         with:
