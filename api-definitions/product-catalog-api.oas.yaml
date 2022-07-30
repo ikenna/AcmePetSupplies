@@ -424,6 +424,7 @@ components:
       properties:
         data:
           type: array
+          maxItems: 25
           items:
             $ref: '#/components/schemas/Category'
           description: ''
@@ -435,6 +436,7 @@ components:
       properties:
         data:
           type: array
+          maxItems: 25
           items:
             $ref: '#/components/schemas/Product'
           description: ''
@@ -449,6 +451,7 @@ components:
       properties:
         data:
           type: array
+          maxItems: 25
           items:
             $ref: '#/components/schemas/Review'
           description: ''
