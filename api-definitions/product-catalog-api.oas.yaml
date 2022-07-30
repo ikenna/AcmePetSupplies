@@ -10,7 +10,7 @@ info:
     email: john.smith@acme-pet-supplies.co.uk
   version: '1.0'
 servers:
-  - url: 'http://{host}:{port}'
+  - url: 'https://{host}:{port}'
     variables:
       host:
         default: localhost
@@ -223,6 +223,7 @@ components:
         - categoryId
         - name
       type: object
+      additionalProperties: false
       properties:
         categoryId:
           type: string
@@ -245,6 +246,7 @@ components:
         - name
         - price
       type: object
+      additionalProperties: false
       properties:
         productId:
           type: string
@@ -352,6 +354,7 @@ components:
       required:
         - self
       type: object
+      additionalProperties: false
       properties:
         self:
           type: string
@@ -382,6 +385,7 @@ components:
         - title
         - status
       type: object
+      additionalProperties: false
       properties:
         type:
           type: string
@@ -405,6 +409,7 @@ components:
     401Error:
       title: 401 Error
       type: object
+      additionalProperties: false
       properties:
         message:
           type: string
@@ -421,6 +426,7 @@ components:
         - data
         - pagination
       type: object
+      additionalProperties: false
       properties:
         data:
           type: array
@@ -433,6 +439,7 @@ components:
     ProductsResponse:
       title: ProductsResponse
       type: object
+      additionalProperties: false
       properties:
         data:
           type: array
@@ -448,6 +455,7 @@ components:
         - data
         - pagination
       type: object
+      additionalProperties: false
       properties:
         data:
           type: array
