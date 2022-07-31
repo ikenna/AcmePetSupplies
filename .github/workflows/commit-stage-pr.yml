@@ -19,9 +19,7 @@ jobs:
       - name: Checkout out pr branch
         uses: actions/checkout@v3
       - name: View working folder
-        run: |
-          ls -lash
-          tree
+        run:  tree
       - name: "Run API linting (with Spectral)"
         uses: stoplightio/spectral-action@latest
         with:
@@ -77,9 +75,7 @@ jobs:
       - name: Checkout out pr branch
         uses: actions/checkout@v3
       - name: View working folder
-        run: |
-          ls -lash
-          tree
+        run:  tree
       - name: "Run OpenAPI security audit"
         uses: 42Crunch/api-security-audit-action@v3
         with:
@@ -123,7 +119,7 @@ jobs:
       - name: Lint guide docs prose
         uses: errata-ai/vale-action@reviewdog
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files:  '["docs"]'
           
