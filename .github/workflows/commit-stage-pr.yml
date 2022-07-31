@@ -106,20 +106,16 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-  commit-stage-lint-natural-languages:
-    name: Lint natural language docs
+  commit-stage-lint-prose:
+    name: Lint prose
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: View all files
-        run: tree
-      - name: Lint guide docs prose
+      - name: Lint guide docs
         uses: errata-ai/vale-action@reviewdog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files:  '["docs"]'
+          files: '["docs"]'
           
