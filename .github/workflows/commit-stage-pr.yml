@@ -108,7 +108,7 @@ jobs:
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
           VALIDATE_ALL_CODEBASE: true
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
   commit-stage-lint-natural-languages:
     name: Lint natural language docs
