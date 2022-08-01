@@ -30,7 +30,7 @@ jobs:
     name: Breaking Change Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout out pr branch
+      - name: Check out out pr branch
         uses: actions/checkout@v3
         with:
           path: head
@@ -40,12 +40,9 @@ jobs:
           ref: main
           path: base
       - name: View working folder
-        run: |
-          ls -lash
-          tree
+        run: tree
       - name: "Run breaking change check (with OpenAPITools/openapi-diff)"
         id: diff_state
-        # https://github.com/swimmwatch/openapi-diff-action
         uses: swimmwatch/openapi-diff-action@v1.0.1
         with:
           old-spec: base/api-definitions/product-catalog-api.oas.yaml
