@@ -14,7 +14,7 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 
 ## Job Stories
 
-When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can chose which I like.
+When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can choose which I like.
 
 ## User Tasks
 
