@@ -6,7 +6,7 @@ Product Catalog API
 
 ## API description
 
-An API to discover Acme's great range of products, so users can find products to care for their pets. 
+An API to discover Acme's great range of products, so users can find products to care for their pets.
 
 ## API Consumer
 
@@ -32,7 +32,7 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 |Browse catalog|View a product|Customer|View a product's details |
 |Browse catalog|List product reviews|Customer|List all reviews for a product|
 |Browse catalog|View a review|Customer|List a product review|
-Note: Search for catalog will be in phase 2
+Note: *Search for catalog* capability  will be in phase 2
 
 ## API Technology Solution and Versioning Strategy
 
