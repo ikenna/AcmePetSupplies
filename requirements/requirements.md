@@ -1,25 +1,37 @@
-# API Profile
+# API Product Requirements
 
 ## API Product Name
 
 Product Catalog API
 
+## API description
+
+An API to discover Acme's great range of products, so users can find products to care for their pets. 
+
 ## API Consumer
 
-The end user is a customer browsing Acme Pet Supplies products in order to make a purchase. They may do this via 3 main channels:
+The end user is a customer browsing Acme Pet Supplies products in order to make a purchase. Client API developers will use this API to build 3 end user channels:
 
-1. The Acme mobile app (Acme channel)
-2. The Acme web store (Acme channel)
+1. The Acme mobile app  
+2. The Acme web store  
 3. An affiliate's store.
 
 ## Job Stories
 
-When I need a product to care for my pet, I want to discover a great range of products in that category with quality reviews, so I can choose which I like.
+|ID|When...|I want to...|So I can...|
+|----|---|---|-----|
+|1|I want to explore what products Acme have available |browse the Acme catalog by category|So I can find new and exciting pet products that interest me |
+|2|I want to find a particular pet product I am interested in | search for it in the Acme catalog| So I can view details of the product and decide if I want to buy|
 
-## User Tasks
+## Digital Capabilties
 
-- Browse for pet products in the Acme catalog. (MVP)
-- Search for pet products in the Acme catalog. (Phase 2)
+|Digital Capability|Activity|Participants|Descripton|
+|----|---|---|-----|
+|Browse catalog|List categories|Customer|List all pet product categories |
+|Browse catalog|List products|Customer|List all products |
+|Browse catalog|View a product|Customer|View a product's details |
+|Browse catalog|Get product reviews|Customer|Get all reviews for a product|
+Note: Search for catalog will be in phase 2
 
 ## API Technology Solution and Versioning Strategy
 
@@ -31,9 +43,9 @@ Public API, made available for use by both Acme owned digital channels and to re
 
 ## Usage Plans
 
-- **Acme mobile app:** 5 requests a minute
-- **Acme web store :** 5 requests a minute
-- **Affiliate stores:** 4 requests a minute
+- **Acme mobile app:** 10 requests a minute
+- **Acme web store :** 10 requests a minute
+- **Affiliate stores:** 8 requests a minute
 
 ## Security Model
 
