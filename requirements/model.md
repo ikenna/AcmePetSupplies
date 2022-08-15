@@ -5,10 +5,11 @@
 
 | User Tasks          | Operation Name | Operation Description     | Participant | Web Resource | Request                                                                 | Response                   | HTTP Method | Resource Path         | Response Code |
 | ------------------- | -------------- | ------------------------- | ----------- | ------------ | ----------------------------------------------------------------------- | -------------------------- | ----------- | --------------------- | ------------- |
-| Browse for products | listCategories | List all categories.      | Customer    | Category     | Filter by field, sort by field, order direction, page size, page cursor | Category[], PaginationInfo | GET         | /categories           | 200           |
-| Browse for products | listProducts   | List all products.        | Customer    | Product      | Filter by field, sort by field, order direction, page size, page cursor | Product[], PaginationInfo  | GET         | /products             | 200           |
-| Browse for products | viewProduct    | View a product's details. | Customer    | Product      | Product ID                                                              | Product                    | GET         | /products/{productId} | 200           |
-| Browse for products | listProductReviews    | List all reviews for a product.          | Customer    | Review       | Filter by field, sort by field, order direction, page size, page cursor | Reviews[], PaginationInfo  | GET         | /reviews              | 200           |
+| Browse for products | listCategories | List all categories      | Customer    | Category     | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET         | /categories           | 200            |
+| Browse for products | listProducts   | List all products        | Customer    | Product      | Filter by field, sort by field, order direction, page size, page cursor  | Product[], PaginationInfo  | GET         | /products             | 200            |
+| Browse for products | viewProduct    | View a product's details | Customer    | Product      | Product ID                                                               | Product                    | GET         | /products/{productId} | 200            |
+| Browse for products | listProductReviews| List all reviews for a product| Customer| Review   | Filter by field, sort by field, order direction, page size, page cursor  | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews | 200    |
+| Browse for products | viewReview    | View a product review     | Customer    | Review       | Product ID, Review ID                                                    | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews/{reviewId} | 200    |
 
 ## Web Resources
 

@@ -31,6 +31,7 @@ The end user is a customer browsing Acme Pet Supplies products in order to make 
 |Browse catalog|List products|Customer|List all products |
 |Browse catalog|View a product|Customer|View a product's details |
 |Browse catalog|List product reviews|Customer|List all reviews for a product|
+|Browse catalog|View a review|Customer|List a product review|
 Note: Search for catalog will be in phase 2
 
 ## API Technology Solution and Versioning Strategy
