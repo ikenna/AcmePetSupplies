@@ -1,6 +1,6 @@
-# API Product Requirements
+# API Requirements
 
-## API Product Name
+## API Name
 
 Product Catalog API
 

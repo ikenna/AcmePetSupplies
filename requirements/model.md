@@ -3,13 +3,13 @@
 
 ## API Operations
 
-| User Tasks          | Operation Name | Operation Description     | Participant | Web Resource | Request                                                                 | Response                   | HTTP Method | Resource Path         | Response Code |
+| Digital capability  | Operation Name | Operation Description     | Participant | Web Resource | Request                                                                 | Response                   | HTTP Method | Resource Path         | Response Code |
 | ------------------- | -------------- | ------------------------- | ----------- | ------------ | ----------------------------------------------------------------------- | -------------------------- | ----------- | --------------------- | ------------- |
-| Browse for products | listCategories | List all categories      | Customer    | Category     | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET         | /categories           | 200            |
-| Browse for products | listProducts   | List all products        | Customer    | Product      | Filter by field, sort by field, order direction, page size, page cursor  | Product[], PaginationInfo  | GET         | /products             | 200            |
-| Browse for products | viewProduct    | View a product's details | Customer    | Product      | Product ID                                                               | Product                    | GET         | /products/{productId} | 200            |
-| Browse for products | listProductReviews| List all reviews for a product| Customer| Review   | Filter by field, sort by field, order direction, page size, page cursor  | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews | 200    |
-| Browse for products | viewReview    | View a product review     | Customer    | Review       | Product ID, Review ID                                                    | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews/{reviewId} | 200    |
+| Browse catalog | listCategories | List all categories      | Customer    | Category     | Filter by field, sort by field, order direction, page size, page cursor  | Category[], PaginationInfo | GET         | /categories           | 200            |
+| Browse catalog | listProducts   | List all products        | Customer    | Product      | Filter by field, sort by field, order direction, page size, page cursor  | Product[], PaginationInfo  | GET         | /products             | 200            |
+| Browse catalog | viewProduct    | View a product's details | Customer    | Product      | Product ID                                                               | Product                    | GET         | /products/{productId} | 200            |
+| Browse catalog | listProductReviews| List all reviews for a product| Customer| Review   | Filter by field, sort by field, order direction, page size, page cursor  | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews | 200    |
+| Browse catalog | viewReview    | View a product review     | Customer    | Review       | Product ID, Review ID                                                    | Reviews[], PaginationInfo  | GET         | /products/{productId}/reviews/{reviewId} | 200    |
 
 ## Web Resources
 
@@ -64,31 +64,23 @@ erDiagram
 ```mermaid
 sequenceDiagram
     Customer ->>+ API Gateway: listCategories()
-    API Gateway ->>+ Product Catalog API Service : listCategories()
-    Product Catalog API Service ->>+ Category Microservice: listCategories()
-    Category Microservice -->>- Product Catalog API Service :  Category[]
-    Product Catalog API Service -->>- API Gateway:  Category[]
+    API Gateway ->>+ Category Microservice : listCategories()
+    Category Microservice -->>- API Gateway :  Category[]
     API Gateway -->>- Customer:  Category[]
 
     Customer ->>+ API Gateway: listProducts()
-    API Gateway ->>+ Product Catalog API Service: listProducts()
-    Product Catalog API Service ->>+ Product Microservice: listProducts()
-    Product Microservice -->>- Product Catalog API Service :  Product[], paginationInfo
-    Product Catalog API Service -->>- API Gateway :  Product[], paginationInfo
+    API Gateway ->>+ Product Microservice: listProducts()
+    Product Microservice -->>- API Gateway  :  Product[], paginationInfo
     API Gateway -->>- Customer:  Product[], paginationInfo
 
     Customer ->>+ API Gateway: viewProduct()
-    API Gateway ->>+ Product Catalog API Service: viewProduct()
-    Product Catalog API Service ->>+ Product Microservice: viewProduct()
-    Product Microservice -->>- Product Catalog API Service:  Product
-    Product Catalog API Service -->>- API Gateway:  Product
+    API Gateway ->>+ Product Microservice: viewProduct()
+    Product Microservice -->>- API Gateway:  Product
     API Gateway -->>- Customer:  Product
 
     Customer ->>+ API Gateway: listReviews()
-    API Gateway ->>+ Product Catalog API Service: listReviews()
-    Product Catalog API Service ->>+ Reviews Microsrevice: listReviews()
-    Reviews Microsrevice -->>- Product Catalog API Service: Reviews[], paginationInfo
-    Product Catalog API Service -->>- API Gateway:  Reviews[], paginationInfo
+    API Gateway ->>+ Reviews Microsrevice: listReviews()
+    Reviews Microsrevice -->>- API Gateway: Reviews[], paginationInfo
     API Gateway -->>- Customer:  Reviews[], paginationInfo
 
 ```

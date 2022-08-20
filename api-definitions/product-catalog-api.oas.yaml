@@ -421,9 +421,6 @@ components:
           example: Invalid authentication credentials
       required:
         - message
-      x-examples:
-        example-1:
-          message: Invalid authentication credentials
     CategoriesResponse:
       title: CategoriesResponse
       required:

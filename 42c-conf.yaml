@@ -1,8 +1,0 @@
-audit:
-  branches:
-    main:
-      fail_on:
-        severity: medium
-      mapping:
-        product-catalog-api.oas.yaml: cdc17153-57a7-4ffc-a50c-495bf9b8db13
-      discovery: false
