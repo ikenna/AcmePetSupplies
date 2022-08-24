@@ -64,23 +64,41 @@ erDiagram
 ```mermaid
 sequenceDiagram
     Customer ->>+ API Gateway: listCategories()
-    API Gateway ->>+ Category Microservice : listCategories()
-    Category Microservice -->>- API Gateway :  Category[]
+    API Gateway ->>+ Product Catalog API Service : listCategories()
+    Product Catalog API Service ->>+ Category Microservice: listCategories()
+    Category Microservice -->>- Product Catalog API Service :  Category[]
+    Product Catalog API Service -->>- API Gateway:  Category[]
     API Gateway -->>- Customer:  Category[]
 
     Customer ->>+ API Gateway: listProducts()
-    API Gateway ->>+ Product Microservice: listProducts()
-    Product Microservice -->>- API Gateway  :  Product[], paginationInfo
+    API Gateway ->>+ Product Catalog API Service: listProducts()
+    Product Catalog API Service ->>+ Product Microservice: listProducts()
+    Product Microservice -->>- Product Catalog API Service :  Product[], paginationInfo
+    Product Catalog API Service -->>- API Gateway :  Product[], paginationInfo
     API Gateway -->>- Customer:  Product[], paginationInfo
 
     Customer ->>+ API Gateway: viewProduct()
-    API Gateway ->>+ Product Microservice: viewProduct()
-    Product Microservice -->>- API Gateway:  Product
+    API Gateway ->>+ Product Catalog API Service: viewProduct()
+    Product Catalog API Service ->>+ Product Microservice: viewProduct()
+    Product Microservice -->>- Product Catalog API Service:  Product
+    Product Catalog API Service -->>- API Gateway:  Product
     API Gateway -->>- Customer:  Product
 
     Customer ->>+ API Gateway: listReviews()
-    API Gateway ->>+ Reviews Microsrevice: listReviews()
-    Reviews Microsrevice -->>- API Gateway: Reviews[], paginationInfo
+    API Gateway ->>+ Product Catalog API Service: listReviews()
+    Product Catalog API Service ->>+ Reviews Microsrevice: listReviews()
+    Reviews Microsrevice -->>- Product Catalog API Service: Reviews[], paginationInfo
+    Product Catalog API Service -->>- API Gateway:  Reviews[], paginationInfo
     API Gateway -->>- Customer:  Reviews[], paginationInfo
 
+    Customer ->>+ API Gateway: health()
+    API Gateway ->>+ Product Catalog API Service: health()
+    Product Catalog API Service ->>+ Category Microservice: health()
+    Category Microservice -->>- Product Catalog API Service: Health
+    Product Catalog API Service ->>+ Product Microservice: health()
+    Product Microservice -->>- Product Catalog API Service: Health
+    Product Catalog API Service ->>+ Reviews Microsrevice: health()
+    Reviews Microsrevice -->>- Product Catalog API Service: Health
+    Product Catalog API Service -->>- API Gateway:  Health
+    API Gateway -->>- Customer:  Health
 ```
