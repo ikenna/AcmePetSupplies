@@ -9,13 +9,15 @@ info:
     url: 'https://acme-pet-supplies.co.uk/docs'
     email: john.smith@acme-pet-supplies.co.uk
   version: '1.0'
+x-42c-skipIssues:
+  - v3-response-406
 servers:
   - url: 'https://{host}:{port}'
     variables:
       host:
         default: localhost
       port:
-        default: '8000'
+        default: '8000'      
 paths:
   /v1/catalog/categories:
     get:
